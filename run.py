@@ -6,7 +6,7 @@ import sys
 
 
 def main():
-    parser = argparse.ArgumentParser(description="AI Model Training CLI")
+    parser = argparse.ArgumentParser(description="TrainStation CLI")
     parser.add_argument("config", nargs="?", help="Path to config file (YAML or JSON)")
     parser.add_argument("--override", "-o", action="append", default=[],
                         help="Config override key=value (repeatable)")

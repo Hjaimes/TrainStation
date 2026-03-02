@@ -2,11 +2,11 @@
 setlocal enabledelayedexpansion
 
 :: ============================================================
-:: AI Trainer — Windows Installer
+:: TrainStation — Windows Installer
 :: Creates a venv, installs PyTorch with CUDA, then all deps.
 :: ============================================================
 
-title AI Trainer Installer
+title TrainStation Installer
 
 :: Colors (Windows 10+)
 set "GREEN=[32m"
@@ -17,7 +17,7 @@ set "RESET=[0m"
 
 echo.
 echo %CYAN%============================================%RESET%
-echo %CYAN%  AI Trainer — Dependency Installer%RESET%
+echo %CYAN%  TrainStation — Dependency Installer%RESET%
 echo %CYAN%============================================%RESET%
 echo.
 

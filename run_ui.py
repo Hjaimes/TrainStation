@@ -5,7 +5,7 @@ import webbrowser
 
 
 def main():
-    parser = argparse.ArgumentParser(description="AI Model Training UI")
+    parser = argparse.ArgumentParser(description="TrainStation UI")
     parser.add_argument("--host", default="127.0.0.1", help="Bind address (default: 127.0.0.1)")
     parser.add_argument("--port", type=int, default=8675, help="Port (default: 8675)")
     parser.add_argument("--desktop", action="store_true",
@@ -33,7 +33,7 @@ def main():
             kwargs={"host": args.host, "port": args.port, "log_level": "warning"},
             daemon=True)
         server_thread.start()
-        webview.create_window("AI Trainer", url, width=1280, height=800)
+        webview.create_window("TrainStation", url, width=1280, height=800)
         webview.start()
     else:
         if not args.no_open:

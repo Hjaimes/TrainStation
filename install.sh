@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ============================================================
-# AI Trainer — Linux/Mac Installer
+# TrainStation — Linux/Mac Installer
 # Creates a venv, installs PyTorch with CUDA, then all deps.
 # ============================================================
 set -e
@@ -13,7 +13,7 @@ NC='\033[0m'
 
 echo ""
 echo -e "${CYAN}============================================${NC}"
-echo -e "${CYAN}  AI Trainer — Dependency Installer${NC}"
+echo -e "${CYAN}  TrainStation — Dependency Installer${NC}"
 echo -e "${CYAN}============================================${NC}"
 echo ""
 

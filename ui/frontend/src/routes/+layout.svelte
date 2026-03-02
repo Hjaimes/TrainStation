@@ -23,7 +23,7 @@
 	<nav class="sidebar">
 		<div class="sidebar-header">
 			<span class="logo-mark">▲</span>
-			<span class="logo-text">AI Trainer</span>
+			<span class="logo-text">TrainStation</span>
 		</div>
 
 		<div class="nav-items">

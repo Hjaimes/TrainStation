@@ -83,7 +83,7 @@ async def _poll_loop(app: FastAPI) -> None:
         await asyncio.sleep(0.1)
 
 
-app = FastAPI(title="AI Trainer", lifespan=lifespan)
+app = FastAPI(title="TrainStation", lifespan=lifespan)
 
 # Routes MUST be included BEFORE static mount
 app.include_router(training_router)
