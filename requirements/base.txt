@@ -1,0 +1,32 @@
+# Base requirements — installs everything except PyTorch (install that first).
+# See install.bat / install.sh for the full setup flow.
+
+# PyTorch ecosystem (torch itself installed separately with CUDA index)
+torchvision>=0.16
+accelerate>=0.25
+safetensors>=0.4
+transformers>=4.36
+
+# Tensor ops
+einops>=0.7
+numpy>=1.24
+
+# Config & data
+pydantic>=2.0
+pyyaml>=6.0
+
+# Text processing
+ftfy>=6.1
+regex>=2023.0
+
+# Progress
+tqdm>=4.65
+
+# UI
+fastapi>=0.104
+uvicorn[standard]>=0.24
+websockets>=12.0
+
+# Dev / testing
+pytest>=7.0
+httpx>=0.25

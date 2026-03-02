@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+	--bg-primary: #0a0e14;
+	--bg-secondary: #111820;
+	--bg-tertiary: #1a2130;
+	--bg-elevated: #1e2736;
+	--border: #2a3545;
+	--border-subtle: #1e2a38;
+	--text-primary: #d4dce8;
+	--text-secondary: #8899aa;
+	--text-muted: #556677;
+	--accent: #3b9eff;
+	--accent-dim: #2a6fb8;
+	--accent-glow: rgba(59, 158, 255, 0.12);
+	--success: #34d399;
+	--warning: #f59e0b;
+	--error: #ef4444;
+	--error-dim: rgba(239, 68, 68, 0.15);
+	--font-mono: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', monospace;
+	--font-sans: 'DM Sans', system-ui, sans-serif;
+	--radius: 4px;
+	--sidebar-width: 220px;
+}
+
+*, *::before, *::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html, body {
+	height: 100%;
+	background: var(--bg-primary);
+	color: var(--text-primary);
+	font-family: var(--font-sans);
+	font-size: 14px;
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+::-webkit-scrollbar-thumb {
+	background: var(--border);
+	border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: var(--text-muted);
+}
+
+button {
+	font-family: var(--font-mono);
+	font-size: 12px;
+	font-weight: 500;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	border: 1px solid var(--border);
+	background: var(--bg-tertiary);
+	color: var(--text-primary);
+	padding: 8px 16px;
+	border-radius: var(--radius);
+	cursor: pointer;
+	transition: all 0.15s ease;
+}
+
+button:hover:not(:disabled) {
+	background: var(--bg-elevated);
+	border-color: var(--accent-dim);
+}
+
+button:disabled {
+	opacity: 0.35;
+	cursor: not-allowed;
+}
+
+textarea {
+	font-family: var(--font-mono);
+	font-size: 12px;
+	background: var(--bg-primary);
+	color: var(--text-primary);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	padding: 12px;
+	resize: vertical;
+	width: 100%;
+}
+
+textarea:focus {
+	outline: none;
+	border-color: var(--accent-dim);
+}

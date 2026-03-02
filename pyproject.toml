@@ -1,0 +1,68 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-trainer"
+version = "0.1.0"
+description = "AI model training application"
+requires-python = ">=3.10"
+dependencies = [
+    # Core ML
+    "torch>=2.1",
+    "torchvision>=0.16",
+    "accelerate>=0.25",
+    "safetensors>=0.4",
+    "transformers>=4.36",
+    # Tensor ops
+    "einops>=0.7",
+    "numpy>=1.24",
+    # Config & data
+    "pydantic>=2.0",
+    "pyyaml>=6.0",
+    # Text processing
+    "ftfy>=6.1",
+    "regex>=2023.0",
+    # Progress
+    "tqdm>=4.65",
+]
+
+[project.optional-dependencies]
+ui = [
+    "fastapi>=0.104",
+    "uvicorn[standard]>=0.24",
+    "websockets>=12.0",
+]
+desktop = [
+    "pywebview>=4.0",
+]
+logging = [
+    "tensorboard>=2.14",
+    "wandb>=0.16",
+]
+optimizers = [
+    "bitsandbytes>=0.43",
+    "prodigyopt>=1.0",
+    "lion-pytorch>=0.1",
+    "came-pytorch>=0.1",
+    "schedulefree>=1.0",
+]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov",
+    "httpx>=0.25",
+]
+all = [
+    "ai-trainer[ui,logging,optimizers]",
+]
+
+[project.scripts]
+ai-train = "run:main"
+ai-train-ui = "run_ui:main"
+
+[tool.setuptools.packages.find]
+include = ["trainer*", "ui*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

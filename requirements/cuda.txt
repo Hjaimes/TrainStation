@@ -1,0 +1,5 @@
+# PyTorch with CUDA 12.8 support
+# Used by install.bat / install.sh — installs torch before other requirements.
+--extra-index-url https://download.pytorch.org/whl/cu128
+torch>=2.5
+torchvision>=0.20

@@ -1,0 +1,15 @@
+# Minimal valid config for testing
+model:
+  architecture: wan
+  base_model_path: "/fake/model.safetensors"
+
+training:
+  method: lora
+
+network:
+  network_type: lora
+  rank: 16
+  alpha: 16.0
+
+data:
+  dataset_config_path: "dataset.toml"

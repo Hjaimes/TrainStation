@@ -1,0 +1,7 @@
+# Optional optimizers — install for additional optimizer choices.
+# All are lazily imported, so the app works without them.
+bitsandbytes>=0.43
+prodigyopt>=1.0
+lion-pytorch>=0.1
+came-pytorch>=0.1
+schedulefree>=1.0

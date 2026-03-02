@@ -1,0 +1,24 @@
+model:
+  architecture: wan
+  dtype: bf16
+  gradient_checkpointing: true
+training:
+  method: lora
+  batch_size: 1
+  gradient_accumulation_steps: 1
+  mixed_precision: bf16
+  noise_offset: 0.0357
+  timestep_sampling: sigmoid
+  sigmoid_scale: 1.0
+optimizer:
+  optimizer_type: adamw
+  learning_rate: 1.0e-4
+  weight_decay: 0.01
+  scheduler_type: cosine
+  warmup_steps: 100
+network:
+  network_type: lora
+  rank: 32
+  alpha: 16
+saving:
+  save_every_n_epochs: 1

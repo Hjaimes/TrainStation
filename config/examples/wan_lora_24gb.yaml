@@ -1,0 +1,63 @@
+# Wan 2.1 LoRA training - 24GB VRAM
+# Usage: python run.py config/examples/wan_lora_24gb.yaml
+
+model:
+  architecture: wan
+  base_model_path: "/models/wan2.1-t2v-14B-bf16.safetensors"
+  vae_path: "/models/wan_vae.safetensors"
+  dtype: bf16
+  gradient_checkpointing: true
+  block_swap_count: 0
+  model_kwargs:
+    task: "t2v-14B"
+    t5_path: "/models/t5-v1_1-xxl"
+
+training:
+  method: lora
+  epochs: 1
+  max_steps: 1600
+  batch_size: 1
+  gradient_accumulation_steps: 1
+  mixed_precision: bf16
+  seed: 42
+  max_grad_norm: 1.0
+  timestep_sampling: sigmoid
+  discrete_flow_shift: 14.5
+
+optimizer:
+  optimizer_type: adamw8bit
+  learning_rate: 1e-4
+  scheduler_type: cosine
+  warmup_steps: 100
+
+network:
+  network_type: lora
+  rank: 32
+  alpha: 16.0
+
+data:
+  dataset_config_path: "dataset_config.toml"
+  cache_latents: true
+  cache_text_encoder_outputs: true
+  resolution: 512
+
+saving:
+  output_dir: "./output/wan_lora"
+  output_name: "wan_lora_v1"
+  save_every_n_steps: 400
+  max_keep_ckpts: 3
+
+sampling:
+  enabled: true
+  prompts:
+    - "a cat sitting on a windowsill watching rain"
+    - "a timelapse of clouds over a mountain"
+  sample_every_n_steps: 400
+  width: 832
+  height: 480
+  num_frames: 81
+  num_inference_steps: 30
+
+logging:
+  logging_dir: "./logs"
+  log_with: tensorboard
