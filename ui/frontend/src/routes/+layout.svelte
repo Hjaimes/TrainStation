@@ -22,7 +22,7 @@
 <div class="shell">
 	<nav class="sidebar">
 		<div class="sidebar-header">
-			<span class="logo-mark">▲</span>
+			<img src="/logo.svg" alt="TrainStation" class="logo-mark" />
 			<span class="logo-text">TrainStation</span>
 		</div>
 
@@ -75,9 +75,9 @@
 	}
 
 	.logo-mark {
-		font-size: 18px;
-		color: var(--accent);
-		line-height: 1;
+		width: 28px;
+		height: 28px;
+		flex-shrink: 0;
 	}
 
 	.logo-text {
