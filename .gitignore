@@ -43,3 +43,9 @@ ui/static/
 
 # Job queue data
 jobs/
+
+# Internal docs / plans
+docs/
+
+# Claude Code config
+.claude/
