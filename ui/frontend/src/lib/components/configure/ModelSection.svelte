@@ -4,8 +4,8 @@
     import { FormField, SelectInput, PathInput, NumberInput, ToggleInput } from '$lib/components/form';
     import type { ModelConfig } from '$lib/types/config';
 
-    let state = $derived($configState);
-    let model = $derived(state.config?.model);
+    let cfg = $derived($configState);
+    let model = $derived(cfg.config?.model);
     let showAdvanced = $state(false);
     let architectures = $state<string[]>([]);
 
@@ -43,9 +43,10 @@
             />
         </FormField>
 
-        <FormField label="Base Model Path" description="Path to transformer/DiT/UNet weights">
+        <FormField label="Base Model Path" description="Local path or HuggingFace model ID (e.g. Wan-AI/Wan2.1-T2V-14B)">
             <PathInput
                 value={model?.base_model_path ?? ''}
+                allowHuggingFace={true}
                 onchange={(v) => update('base_model_path', v)}
             />
         </FormField>
@@ -99,9 +100,12 @@
             />
         </FormField>
 
-        <FormField label="VAE Path" description="Custom VAE weights (leave empty for default)">
+        <FormField label="VAE Path" description="Custom VAE weights — local path or HuggingFace ID (leave empty for default)">
             <PathInput
                 value={model?.vae_path ?? ''}
+                mode="file"
+                extensions={['safetensors', 'ckpt', 'pt']}
+                allowHuggingFace={true}
                 onchange={(v) => update('vae_path', v || null)}
             />
         </FormField>

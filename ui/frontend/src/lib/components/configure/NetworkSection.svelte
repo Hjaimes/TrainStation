@@ -3,9 +3,9 @@
     import { FormField, SelectInput, PathInput, NumberInput, TextInput, ToggleInput } from '$lib/components/form';
     import type { NetworkConfig } from '$lib/types/config';
 
-    let state = $derived($configState);
-    let network = $derived(state.config?.network);
-    let training = $derived(state.config?.training);
+    let cfg = $derived($configState);
+    let network = $derived(cfg.config?.network);
+    let training = $derived(cfg.config?.training);
     let isFullFinetune = $derived(training?.method === 'full_finetune');
     let showAdvanced = $state(false);
 
@@ -152,6 +152,8 @@
             <FormField label="Network Weights Path" description="Resume from existing network weights">
                 <PathInput
                     value={network?.network_weights ?? ''}
+                    mode="file"
+                    extensions={['safetensors', 'ckpt', 'pt']}
                     onchange={(v) => update('network_weights', v || null)}
                 />
             </FormField>

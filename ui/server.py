@@ -18,6 +18,7 @@ from ui.routes.presets import router as presets_router
 from ui.routes.samples import router as samples_router
 from ui.routes.queue import router as queue_router
 from ui.routes.preflight import router as preflight_router
+from ui.routes.browse import router as browse_router
 
 logger = logging.getLogger(__name__)
 
@@ -94,6 +95,7 @@ app.include_router(presets_router)
 app.include_router(samples_router)
 app.include_router(queue_router)
 app.include_router(preflight_router)
+app.include_router(browse_router)
 
 # Static SPA fallback — serves index.html for unknown paths
 if STATIC_DIR.exists():

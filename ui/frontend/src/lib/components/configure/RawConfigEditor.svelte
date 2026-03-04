@@ -1,15 +1,15 @@
 <script lang="ts">
     import { configState } from '$lib/stores/config';
 
-    let state = $derived($configState);
+    let cfg = $derived($configState);
     let rawText = $state('');
     let parseError = $state('');
     let syncing = false;
 
     // Update rawText when config changes (unless user is editing)
     $effect(() => {
-        if (state.config && !syncing) {
-            rawText = JSON.stringify(state.config, null, 2);
+        if (cfg.config && !syncing) {
+            rawText = JSON.stringify(cfg.config, null, 2);
         }
     });
 

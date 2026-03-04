@@ -55,13 +55,13 @@ ws_router = APIRouter()
 
 
 @ws_router.websocket("/ws/training")
-async def training_ws(websocket: WebSocket, request: Request):
+async def training_ws(websocket: WebSocket):
     await websocket.accept()
-    request.app.state.ws_clients.add(websocket)
+    websocket.app.state.ws_clients.add(websocket)
     try:
         while True:
             await websocket.receive_text()
     except WebSocketDisconnect:
         pass
     finally:
-        request.app.state.ws_clients.discard(websocket)
+        websocket.app.state.ws_clients.discard(websocket)

@@ -3,10 +3,10 @@
     import { FormField, SelectInput, PathInput, NumberInput, TextInput, ToggleInput } from '$lib/components/form';
     import type { SavingConfig, LoggingConfig, ValidationConfig } from '$lib/types/config';
 
-    let state = $derived($configState);
-    let saving = $derived(state.config?.saving);
-    let logging = $derived(state.config?.logging);
-    let validation = $derived(state.config?.validation);
+    let cfg = $derived($configState);
+    let saving = $derived(cfg.config?.saving);
+    let logging = $derived(cfg.config?.logging);
+    let validation = $derived(cfg.config?.validation);
     let showAdvanced = $state(false);
 
     function updateSaving(field: keyof SavingConfig, value: unknown) {

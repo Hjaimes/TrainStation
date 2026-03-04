@@ -26,7 +26,7 @@
         font-family: var(--font-mono);
         font-size: 13px;
         background: var(--bg-primary);
-        color: var(--text-primary);
+        color: var(--text-secondary);
         border: 1px solid var(--border);
         border-radius: var(--radius);
         padding: 8px 10px;
@@ -38,6 +38,6 @@
     .num-input::placeholder { color: var(--text-muted); }
     /* Hide spin buttons */
     .num-input::-webkit-inner-spin-button,
-    .num-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-    .num-input { -moz-appearance: textfield; }
+    .num-input::-webkit-outer-spin-button { -webkit-appearance: none; appearance: none; margin: 0; }
+    .num-input { -moz-appearance: textfield; appearance: textfield; }
 </style>

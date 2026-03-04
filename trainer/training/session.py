@@ -46,7 +46,10 @@ class TrainingSession:
         # 1. Freeze config
         frozen = config.freeze()
 
-        # 2. Pre-flight validation
+        # 2. Resolve HuggingFace model IDs to local paths
+        self._resolve_hf_paths(frozen, callbacks)
+
+        # 3. Pre-flight validation
         from trainer.config.validation import validate_config
         result = validate_config(frozen)
         if result.has_errors:
@@ -56,22 +59,22 @@ class TrainingSession:
         for issue in result.warnings:
             logger.warning(f"Config warning: {issue.message}")
 
-        # 3. Discover and resolve strategy
+        # 4. Discover and resolve strategy
         from trainer.registry import get_model_strategy
         StrategyClass = get_model_strategy(frozen.model.architecture)
         strategy = StrategyClass(frozen)
 
-        # 4. Load model components
+        # 5. Load model components
         logger.info(f"Loading model: {frozen.model.architecture}")
         self._notify_log(callbacks, "INFO", f"Loading {frozen.model.architecture} model...")
         components = strategy.setup()
 
-        # 5. Handle preprocessing modes
+        # 6. Handle preprocessing modes
         if mode != "train":
             self._run_preprocessing(mode, strategy, components, frozen, callbacks)
             return
 
-        # 6. Prepare training method (LoRA injection or full finetune)
+        # 7. Prepare training method (LoRA injection or full finetune)
         from trainer.training.methods import create_training_method
         method = create_training_method(frozen)
         method_result = method.prepare(
@@ -81,7 +84,7 @@ class TrainingSession:
             text_encoders=components.text_encoders or None,
         )
 
-        # 7. Create and run trainer
+        # 8. Create and run trainer
         from trainer.training.trainer import Trainer
         trainer = Trainer(
             config=frozen,
@@ -91,6 +94,40 @@ class TrainingSession:
             callbacks=callbacks,
         )
         trainer.run()
+
+    def _resolve_hf_paths(
+        self, config: TrainConfig, callbacks: list[TrainingCallback],
+    ) -> None:
+        """Resolve any HuggingFace model IDs to local cached paths in-place."""
+        from trainer.util.hf_utils import is_huggingface_id, resolve_hf_model_path
+
+        if is_huggingface_id(config.model.base_model_path):
+            self._notify_log(
+                callbacks, "INFO",
+                f"Downloading HuggingFace model: {config.model.base_model_path}...",
+            )
+            try:
+                local_path = resolve_hf_model_path(config.model.base_model_path)
+                logger.info(f"Resolved {config.model.base_model_path} -> {local_path}")
+                config.model.base_model_path = local_path
+            except Exception as e:
+                raise ModelLoadError(
+                    f"Failed to download HuggingFace model '{config.model.base_model_path}': {e}"
+                ) from e
+
+        if config.model.vae_path and is_huggingface_id(config.model.vae_path):
+            self._notify_log(
+                callbacks, "INFO",
+                f"Downloading HuggingFace VAE: {config.model.vae_path}...",
+            )
+            try:
+                local_path = resolve_hf_model_path(config.model.vae_path)
+                logger.info(f"Resolved {config.model.vae_path} -> {local_path}")
+                config.model.vae_path = local_path
+            except Exception as e:
+                raise ModelLoadError(
+                    f"Failed to download HuggingFace VAE '{config.model.vae_path}': {e}"
+                ) from e
 
     def _run_preprocessing(self, mode, strategy, components, config, callbacks):
         if mode in ("cache-latents", "cache-all"):

@@ -408,3 +408,11 @@ def test_import_ui_routes_samples():
 
 def test_import_ui_routes_preflight():
     from ui.routes.preflight import router
+
+
+def test_import_ui_routes_browse():
+    from ui.routes.browse import router
+
+
+def test_import_util_hf_utils():
+    from trainer.util.hf_utils import is_huggingface_id, resolve_path_if_hf, find_safetensors_in_dir

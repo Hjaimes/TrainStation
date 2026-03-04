@@ -20,7 +20,7 @@
         font-family: var(--font-mono);
         font-size: 13px;
         background: var(--bg-primary);
-        color: var(--text-primary);
+        color: var(--text-secondary);
         border: 1px solid var(--border);
         border-radius: var(--radius);
         padding: 8px 10px;

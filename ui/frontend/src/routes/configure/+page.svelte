@@ -20,31 +20,31 @@
 	let showSavePreset = $state(false);
 	let showPreflight = $state(false);
 	let presetDropdown: PresetDropdown;
-	let state = $derived($configState);
+	let cfg = $derived($configState);
 
 	onMount(async () => {
-		if (!state.config) {
+		if (!cfg.config) {
 			await loadDefaults('wan');
 		}
 	});
 
 	async function handleValidate() {
-		if (state.config) await validateConfig(state.config);
+		if (cfg.config) await validateConfig(cfg.config);
 	}
 
 	function handleStart() {
-		if (state.config) {
+		if (cfg.config) {
 			showPreflight = true;
 		}
 	}
 
 	async function handleQueue() {
-		if (!state.config) return;
+		if (!cfg.config) return;
 		await handleValidate();
-		if (!state.valid) return;
-		const arch = (state.config.model as Record<string, unknown>)?.architecture ?? 'unknown';
+		if (!cfg.valid) return;
+		const arch = cfg.config.model?.architecture ?? 'unknown';
 		const name = `${arch}-${new Date().toISOString().slice(0, 16).replace('T', '-')}`;
-		await queueStore.addJob(name, state.config as unknown as Record<string, unknown>);
+		await queueStore.addJob(name, cfg.config as unknown as Record<string, unknown>);
 		await goto('/queue');
 	}
 </script>
@@ -54,7 +54,7 @@
 		onvalidate={handleValidate}
 		onstart={handleStart}
 		onqueue={handleQueue}
-		valid={state.valid}
+		valid={cfg.valid}
 	>
 		{#snippet preset()}
 			<PresetDropdown bind:this={presetDropdown} />
@@ -93,16 +93,16 @@
 				<RawConfigEditor />
 			{/if}
 
-			{#if state.errors.length > 0}
+			{#if cfg.errors.length > 0}
 				<div class="error-list">
-					{#each state.errors as err}
+					{#each cfg.errors as err}
 						<div class="error-item">{'\u2022'} {err}</div>
 					{/each}
 				</div>
 			{/if}
-			{#if state.warnings.length > 0}
+			{#if cfg.warnings.length > 0}
 				<div class="warning-list">
-					{#each state.warnings as warn}
+					{#each cfg.warnings as warn}
 						<div class="warning-item">{'\u2022'} {warn}</div>
 					{/each}
 				</div>

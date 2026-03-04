@@ -3,9 +3,9 @@
     import { FormField, SelectInput, PathInput, NumberInput, TextInput, ToggleInput } from '$lib/components/form';
     import type { DataConfig, DatasetEntry } from '$lib/types/config';
 
-    let state = $derived($configState);
-    let data = $derived(state.config?.data);
-    let batchSize = $derived(state.config?.training?.batch_size);
+    let cfg = $derived($configState);
+    let data = $derived(cfg.config?.data);
+    let batchSize = $derived(cfg.config?.training?.batch_size);
     let showAdvanced = $state(false);
 
     function update(field: keyof DataConfig, value: unknown) {
@@ -13,13 +13,13 @@
     }
 
     function updateDataset(index: number, field: keyof DatasetEntry, value: unknown) {
-        const datasets = [...(state.config?.data.datasets ?? [])];
+        const datasets = [...(cfg.config?.data.datasets ?? [])];
         datasets[index] = { ...datasets[index], [field]: value };
         configState.updateSection('data', { datasets });
     }
 
     function addDataset() {
-        const datasets = [...(state.config?.data.datasets ?? [])];
+        const datasets = [...(cfg.config?.data.datasets ?? [])];
         datasets.push({
             path: '',
             caption_extension: '.txt',
@@ -33,7 +33,7 @@
     }
 
     function removeDataset(index: number) {
-        const datasets = (state.config?.data.datasets ?? []).filter((_: DatasetEntry, i: number) => i !== index);
+        const datasets = (cfg.config?.data.datasets ?? []).filter((_: DatasetEntry, i: number) => i !== index);
         configState.updateSection('data', { datasets });
     }
 </script>
@@ -45,6 +45,8 @@
         <FormField label="Dataset Config Path" description="Path to TOML dataset config (Musubi compat)">
             <PathInput
                 value={data?.dataset_config_path ?? ''}
+                mode="file"
+                extensions={['toml']}
                 onchange={(v) => update('dataset_config_path', v || null)}
             />
         </FormField>

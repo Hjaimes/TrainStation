@@ -3,8 +3,8 @@
     import { FormField, PathInput, NumberInput, TextInput, ToggleInput } from '$lib/components/form';
     import type { SamplingConfig } from '$lib/types/config';
 
-    let state = $derived($configState);
-    let sampling = $derived(state.config?.sampling);
+    let cfg = $derived($configState);
+    let sampling = $derived(cfg.config?.sampling);
     let showAdvanced = $state(false);
 
     function update(field: keyof SamplingConfig, value: unknown) {
@@ -126,6 +126,8 @@
         <FormField label="Prompts File" description="Path to file with prompts (one per line)">
             <PathInput
                 value={sampling?.prompts_file ?? ''}
+                mode="file"
+                extensions={['txt']}
                 onchange={(v) => update('prompts_file', v || null)}
             />
         </FormField>

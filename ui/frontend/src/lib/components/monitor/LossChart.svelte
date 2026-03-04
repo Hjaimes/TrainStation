@@ -18,7 +18,7 @@
 					{
 						label: 'Loss',
 						data: [],
-						borderColor: 'rgba(59, 158, 255, 0.25)',
+						borderColor: 'rgba(245, 74, 177, 0.35)',
 						borderWidth: 1,
 						pointRadius: 0,
 						tension: 0.1,
@@ -27,7 +27,7 @@
 					{
 						label: 'Avg Loss',
 						data: [],
-						borderColor: '#3b9eff',
+						borderColor: '#f53689',
 						borderWidth: 2,
 						pointRadius: 0,
 						tension: 0.3,
@@ -46,15 +46,15 @@
 				scales: {
 					x: {
 						display: true,
-						title: { display: true, text: 'Step', color: '#556677', font: { family: 'JetBrains Mono', size: 10 } },
+						title: { display: true, text: 'Step', color: '#997c87', font: { family: 'JetBrains Mono', size: 10 } },
 						grid: { color: 'rgba(255, 255, 255, 0.04)' },
-						ticks: { color: '#556677', font: { family: 'JetBrains Mono', size: 10 }, maxTicksLimit: 10 },
+						ticks: { color: '#997c87', font: { family: 'JetBrains Mono', size: 10 }, maxTicksLimit: 10 },
 					},
 					y: {
 						display: true,
-						title: { display: true, text: 'Loss', color: '#556677', font: { family: 'JetBrains Mono', size: 10 } },
+						title: { display: true, text: 'Loss', color: '#997c87', font: { family: 'JetBrains Mono', size: 10 } },
 						grid: { color: 'rgba(255, 255, 255, 0.04)' },
-						ticks: { color: '#556677', font: { family: 'JetBrains Mono', size: 10 } },
+						ticks: { color: '#997c87', font: { family: 'JetBrains Mono', size: 10 } },
 					},
 				},
 				plugins: {
@@ -63,7 +63,7 @@
 						position: 'top',
 						align: 'end',
 						labels: {
-							color: '#8899aa',
+							color: '#c4a0ad',
 							font: { family: 'JetBrains Mono', size: 10 },
 							boxWidth: 12,
 							boxHeight: 2,
@@ -71,10 +71,10 @@
 						},
 					},
 					tooltip: {
-						backgroundColor: '#1e2736',
-						titleColor: '#d4dce8',
-						bodyColor: '#8899aa',
-						borderColor: '#2a3545',
+						backgroundColor: '#1c181b',
+						titleColor: '#ffdae8',
+						bodyColor: '#c4a0ad',
+						borderColor: '#36212d',
 						borderWidth: 1,
 						titleFont: { family: 'JetBrains Mono', size: 11 },
 						bodyFont: { family: 'JetBrains Mono', size: 11 },

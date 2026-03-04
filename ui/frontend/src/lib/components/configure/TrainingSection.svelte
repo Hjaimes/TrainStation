@@ -3,9 +3,9 @@
     import { FormField, SelectInput, NumberInput, ToggleInput } from '$lib/components/form';
     import type { TrainingConfig, OptimizerConfig } from '$lib/types/config';
 
-    let state = $derived($configState);
-    let training = $derived(state.config?.training);
-    let optimizer = $derived(state.config?.optimizer);
+    let cfg = $derived($configState);
+    let training = $derived(cfg.config?.training);
+    let optimizer = $derived(cfg.config?.optimizer);
     let showAdvanced = $state(false);
 
     let useMaxSteps = $state(false);
@@ -399,7 +399,7 @@
     }
     .mode-btn.active {
         background: var(--accent-dim) !important;
-        color: var(--accent);
+        color: var(--text-primary);
         font-weight: 600;
     }
     .toggle-advanced {

@@ -104,7 +104,7 @@
 		padding: 10px 12px;
 		border-radius: var(--radius);
 		text-decoration: none;
-		color: var(--text-secondary);
+		color: var(--text-primary);
 		font-size: 13px;
 		font-weight: 500;
 		transition: all 0.12s ease;

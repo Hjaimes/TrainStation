@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Callable
 
 from trainer.config.schema import TrainConfig
+from trainer.util.hf_utils import is_huggingface_id
 
 
 @dataclass
@@ -40,23 +41,35 @@ def validate_config(config: TrainConfig) -> ValidationResult:
     """Run all pre-flight checks. Returns structured results for UI display."""
     result = ValidationResult()
 
-    # Path validation
-    model_path = Path(config.model.base_model_path)
-    if not model_path.exists():
-        result.errors.append(ValidationIssue(
-            level="error",
-            message=f"Base model path does not exist: {model_path}",
-            go_to_tab="Model", field_path="model.base_model_path",
+    # Path validation (skip filesystem check for HuggingFace model IDs)
+    if is_huggingface_id(config.model.base_model_path):
+        result.info.append(ValidationIssue(
+            level="info",
+            message=f"HuggingFace model ID detected: {config.model.base_model_path} (will be downloaded at training start)",
         ))
-
-    if config.model.vae_path:
-        vae_path = Path(config.model.vae_path)
-        if not vae_path.exists():
+    else:
+        model_path = Path(config.model.base_model_path)
+        if not model_path.exists():
             result.errors.append(ValidationIssue(
                 level="error",
-                message=f"VAE path does not exist: {vae_path}",
-                go_to_tab="Model", field_path="model.vae_path",
+                message=f"Base model path does not exist: {model_path}",
+                go_to_tab="Model", field_path="model.base_model_path",
             ))
+
+    if config.model.vae_path:
+        if is_huggingface_id(config.model.vae_path):
+            result.info.append(ValidationIssue(
+                level="info",
+                message=f"HuggingFace VAE ID detected: {config.model.vae_path} (will be downloaded at training start)",
+            ))
+        else:
+            vae_path = Path(config.model.vae_path)
+            if not vae_path.exists():
+                result.errors.append(ValidationIssue(
+                    level="error",
+                    message=f"VAE path does not exist: {vae_path}",
+                    go_to_tab="Model", field_path="model.vae_path",
+                ))
 
     output_dir = Path(config.saving.output_dir)
     if not output_dir.parent.exists():

@@ -2,7 +2,7 @@
 	import { configState, validateConfig } from '$lib/stores/config';
 
 	let configText = $state('{}');
-	let state = $derived($configState);
+	let cfg = $derived($configState);
 
 	async function handleValidate() {
 		try {
@@ -30,24 +30,24 @@
 
 	<div class="editor-footer">
 		<button onclick={handleValidate}>Validate</button>
-		{#if state.valid === true}
+		{#if cfg.valid === true}
 			<span class="validation-ok">✓ Valid</span>
-		{:else if state.valid === false}
+		{:else if cfg.valid === false}
 			<span class="validation-err">✗ Invalid</span>
 		{/if}
 	</div>
 
-	{#if state.errors.length > 0}
+	{#if cfg.errors.length > 0}
 		<div class="error-list">
-			{#each state.errors as err}
+			{#each cfg.errors as err}
 				<div class="error-item">• {err}</div>
 			{/each}
 		</div>
 	{/if}
 
-	{#if state.warnings.length > 0}
+	{#if cfg.warnings.length > 0}
 		<div class="warning-list">
-			{#each state.warnings as warn}
+			{#each cfg.warnings as warn}
 				<div class="warning-item">• {warn}</div>
 			{/each}
 		</div>

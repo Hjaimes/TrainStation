@@ -28,7 +28,7 @@
         font-family: var(--font-mono);
         font-size: 13px;
         background: var(--bg-primary);
-        color: var(--text-primary);
+        color: var(--text-secondary);
         border: 1px solid var(--border);
         border-radius: var(--radius);
         padding: 8px 10px;
@@ -36,7 +36,7 @@
         cursor: pointer;
         transition: border-color 0.15s ease;
         appearance: none;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 5l3 3 3-3' stroke='%23556677' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 5l3 3 3-3' stroke='%23997c87' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");
         background-repeat: no-repeat;
         background-position: right 10px center;
         padding-right: 30px;
