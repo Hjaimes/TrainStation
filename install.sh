@@ -145,6 +145,7 @@ echo ""
 echo -e "${CYAN}[6/6]${NC} Building frontend..."
 
 if command -v npm &>/dev/null; then
+    [ -d "ui/static" ] && rm -rf ui/static
     cd ui/frontend
     npm install --silent 2>/dev/null
     npm run build || {

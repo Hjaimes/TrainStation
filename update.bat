@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 :: ============================================================
-:: TrainStation — Windows Updater
+:: TrainStation -Windows Updater
 :: Pulls latest from GitHub, reinstalls deps, rebuilds frontend.
 :: ============================================================
 
@@ -18,7 +18,7 @@ set "RESET=%ESC%[0m"
 
 echo.
 echo %CYAN%============================================%RESET%
-echo %CYAN%  TrainStation — Updater%RESET%
+echo %CYAN%  TrainStation -Updater%RESET%
 echo %CYAN%============================================%RESET%
 echo.
 
@@ -104,12 +104,16 @@ echo %CYAN%[4/4]%RESET% Rebuilding frontend...
 
 where npm >nul 2>&1
 if errorlevel 1 (
-    echo   %YELLOW%WARNING: npm not found — skipping frontend build.%RESET%
+    echo   %YELLOW%WARNING: npm not found -skipping frontend build.%RESET%
     echo   Install Node.js from https://nodejs.org/ then run:
     echo     cd ui\frontend ^&^& npm install ^&^& npm run build
     goto :update_done
 )
 
+if exist "ui\static" (
+    echo   Cleaning old build...
+    rd /s /q "ui\static"
+)
 cd ui\frontend
 call npm install --silent 2>nul
 call npm run build

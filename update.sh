@@ -87,6 +87,7 @@ echo ""
 echo -e "${CYAN}[4/4]${NC} Rebuilding frontend..."
 
 if command -v npm &>/dev/null; then
+    [ -d "ui/static" ] && rm -rf ui/static
     cd ui/frontend
     npm install --silent 2>/dev/null
     npm run build || {

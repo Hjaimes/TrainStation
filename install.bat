@@ -187,6 +187,10 @@ if errorlevel 1 (
     goto :frontend_done
 )
 
+if exist "ui\static" (
+    echo   Cleaning old build...
+    rd /s /q "ui\static"
+)
 cd ui\frontend
 call npm install --silent 2>nul
 call npm run build
