@@ -2,7 +2,7 @@
 
 Ported from Musubi_Tuner's kandinsky5/models/nn.py.
 Improvements over source:
-- Removed logging.basicConfig() — logging is configured centrally.
+- Removed logging.basicConfig() - logging is configured centrally.
 - torch.concat replaced with torch.cat throughout.
 - apply_scale_shift_norm / apply_gate_sum use in-place cast to reduce allocations.
 - RoPE1D grows its cached args table on-demand (safe for varying sequence lengths).
@@ -115,7 +115,7 @@ class TextEmbeddings(nn.Module):
 class VisualEmbeddings(nn.Module):
     """Patchify spatial-temporal video latents then project to model_dim.
 
-    Input shape: (F, H, W, C) — channels-last video tensor.
+    Input shape: (F, H, W, C) - channels-last video tensor.
     Output shape: (F/pT, H/pH, W/pW, model_dim).
     """
 
@@ -141,7 +141,7 @@ class VisualEmbeddings(nn.Module):
 
 
 class RoPE1D(nn.Module):
-    """1-D Rotary Position Embeddings — used for text token sequences."""
+    """1-D Rotary Position Embeddings - used for text token sequences."""
 
     def __init__(self, dim: int, max_pos: int = 1024, max_period: float = 10000.0) -> None:
         super().__init__()
@@ -177,7 +177,7 @@ class RoPE1D(nn.Module):
 
 
 class RoPE3D(nn.Module):
-    """3-D Rotary Position Embeddings — used for visual token sequences (T, H, W)."""
+    """3-D Rotary Position Embeddings - used for visual token sequences (T, H, W)."""
 
     def __init__(
         self,
@@ -231,7 +231,7 @@ class RoPE3D(nn.Module):
 # ---------------------------------------------------------------------------
 
 class Modulation(nn.Module):
-    """AdaLN modulation layer — zero-initialised to be identity at start of training."""
+    """AdaLN modulation layer - zero-initialised to be identity at start of training."""
 
     def __init__(self, time_dim: int, model_dim: int, num_params: int) -> None:
         super().__init__()

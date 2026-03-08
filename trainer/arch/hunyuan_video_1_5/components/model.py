@@ -1,11 +1,11 @@
 """HunyuanVideo 1.5 Diffusion Transformer model.
 
-Self-contained — no imports from hunyuan_video/ or Musubi_Tuner.
+Self-contained - no imports from hunyuan_video/ or Musubi_Tuner.
 
 Key architecture:
 - 54 MMDoubleStreamBlock (NO single-stream blocks)
-- patch_size = [1, 1, 1] — no spatial/temporal patching
-- guidance_embed = False — no guidance parameter in forward()
+- patch_size = [1, 1, 1] - no spatial/temporal patching
+- guidance_embed = False - no guidance parameter in forward()
 - Text encoders: Qwen2.5-VL + ByT5 (cached; not loaded here)
 - Block swap: single ModelOffloader for double blocks
 
@@ -37,7 +37,7 @@ class HunyuanVideo15Transformer(nn.Module):
 
     Args:
         task_type: "t2v" or "i2v".
-        attn_mode: Attention backend — "torch", "flash", "sageattn", "xformers".
+        attn_mode: Attention backend - "torch", "flash", "sageattn", "xformers".
         split_attn: Use split-attention (processes each batch element separately).
         config: Architecture hyperparameters (defaults to HV15_CONFIG).
     """
@@ -170,7 +170,7 @@ class HunyuanVideo15Transformer(nn.Module):
         use_pinned_memory: bool = False,
     ) -> None:
         assert num_blocks < self.num_double_blocks - 2, (
-            f"Cannot swap {num_blocks} blocks — max is {self.num_double_blocks - 2}"
+            f"Cannot swap {num_blocks} blocks - max is {self.num_double_blocks - 2}"
         )
         self.blocks_to_swap = num_blocks
         self.offloader_double = ModelOffloader(
@@ -183,7 +183,7 @@ class HunyuanVideo15Transformer(nn.Module):
             use_pinned_memory=use_pinned_memory,
         )
         logger.info(
-            "HV 1.5: block swap enabled — swapping %d double blocks to %s (backward=%s)",
+            "HV 1.5: block swap enabled - swapping %d double blocks to %s (backward=%s)",
             num_blocks, device, supports_backward,
         )
 

@@ -1,4 +1,4 @@
-"""Fused backward pass — per-parameter optimizer stepping during backward.
+"""Fused backward pass - per-parameter optimizer stepping during backward.
 
 Instead of the standard pattern:
     loss.backward()       # accumulate ALL gradients
@@ -10,7 +10,7 @@ Fused backward does:
                          immediately step that param and zero its grad.
 
 This means only one parameter's gradient is in memory at a time, saving ~25-40%
-VRAM. The savings come purely from not storing all gradients simultaneously —
+VRAM. The savings come purely from not storing all gradients simultaneously - 
 optimizer states (exp_avg, exp_avg_sq) are still fully in memory.
 
 Uses torch.Tensor.register_post_accumulate_grad_hook() (PyTorch 2.1+).
@@ -19,7 +19,7 @@ Constraints:
     - Single-GPU only (bypasses Accelerate gradient sync).
     - No VRAM benefit with gradient_accumulation > 1 (full grads needed for
       accumulation steps; only the final micro-step would benefit).
-    - Gradient clipping (max_grad_norm) is incompatible — grads are freed
+    - Gradient clipping (max_grad_norm) is incompatible - grads are freed
       immediately and cannot be globally normalised.
     - Only AdamW is supported natively. Other optimizers fall back to a plain
       SGD-style update (no momentum/variance) with a warning.
@@ -60,7 +60,7 @@ class FusedBackwardManager:
         2. Zeros the gradient immediately to free the memory.
 
     The normal optimizer.step() and optimizer.zero_grad() calls MUST be skipped
-    when fused backward is active — see Trainer integration notes.
+    when fused backward is active - see Trainer integration notes.
 
     Example::
 
@@ -152,7 +152,7 @@ class FusedBackwardManager:
         """Eagerly create AdamW moment buffers in optimizer.state for param."""
         state = self.optimizer.state[param]
         if not state:
-            state["step"] = 0  # Python int — avoids GPU sync from .item()
+            state["step"] = 0  # Python int - avoids GPU sync from .item()
             state["exp_avg"] = torch.zeros_like(param.data)
             state["exp_avg_sq"] = torch.zeros_like(param.data)
 
@@ -168,7 +168,7 @@ class FusedBackwardManager:
         optimizer = self.optimizer
         state = optimizer.state[param]
 
-        # Capture hyperparams at registration time — only lr changes via
+        # Capture hyperparams at registration time - only lr changes via
         # scheduler; betas/eps/wd are fixed for the lifetime of the param group.
         beta1, beta2 = group.get("betas", (0.9, 0.999))
         eps: float = group.get("eps", 1e-8)
@@ -184,7 +184,7 @@ class FusedBackwardManager:
             lr: float = group["lr"]
 
             with torch.no_grad():
-                # Python int step counter — avoids GPU->CPU sync from tensor .item()
+                # Python int step counter - avoids GPU->CPU sync from tensor .item()
                 step = state["step"] + 1
                 state["step"] = step
 
@@ -222,7 +222,7 @@ class FusedBackwardManager:
     def _make_sgd_hook(self, param: Tensor, group: dict):
         """Return a plain SGD-style hook (fallback for non-AdamW optimizers).
 
-        Only applies weight decay and a gradient step — no momentum or variance.
+        Only applies weight decay and a gradient step - no momentum or variance.
         This is mathematically equivalent to SGD with the given lr/weight_decay,
         NOT to whatever the original optimizer does.
         """

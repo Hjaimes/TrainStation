@@ -57,7 +57,7 @@ def _scale_lr(base_lr: float, batch_size: int, grad_accum: int, method: str) -> 
         base_lr: The base learning rate from config.
         batch_size: Per-device batch size.
         grad_accum: Gradient accumulation steps.
-        method: Scaling method — "none", "linear", or "sqrt".
+        method: Scaling method - "none", "linear", or "sqrt".
 
     Returns:
         Scaled learning rate.

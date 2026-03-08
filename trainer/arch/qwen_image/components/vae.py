@@ -80,7 +80,7 @@ class DiagonalGaussianDistribution:
 # ---------------------------------------------------------------------------
 
 class QwenImageCausalConv3d(nn.Conv3d):
-    """3D causal convolution — zero-pads the time dimension on the left only."""
+    """3D causal convolution - zero-pads the time dimension on the left only."""
 
     def __init__(
         self,
@@ -680,7 +680,7 @@ class AutoencoderKLQwenImage(nn.Module):
     # ------------------------------------------------------------------
 
     def encode_pixels_to_latents(self, pixels: torch.Tensor) -> torch.Tensor:
-        """Encode pixels (0–1 range) to normalized latents.
+        """Encode pixels (0 - 1 range) to normalized latents.
 
         Args:
             pixels: [B, C, H, W] or [B, C, T, H, W] in [0, 1].

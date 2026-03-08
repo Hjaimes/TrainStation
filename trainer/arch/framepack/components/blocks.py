@@ -1,6 +1,6 @@
 """HunyuanVideo transformer blocks for FramePack.
 
-Self-contained — no imports from any other architecture module.
+Self-contained - no imports from any other architecture module.
 Ported from Musubi_Tuner/src/musubi_tuner/frame_pack/hunyuan_video_packed.py.
 
 Original code: https://github.com/lllyasviel/FramePack
@@ -414,7 +414,7 @@ def _attn_varlen_func(
     Shapes: q, k, v: [B, L, H, D] (NHD layout).
     """
     if cu_seqlens_q is None:
-        # No variable length — plain batched attention
+        # No variable length - plain batched attention
         if attn_mode == "sageattn" or (attn_mode is None and sageattn is not None):
             return sageattn(q, k, v, tensor_layout="NHD")
         if attn_mode == "flash" or (attn_mode is None and flash_attn_func is not None):

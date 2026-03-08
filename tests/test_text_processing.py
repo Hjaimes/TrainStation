@@ -1,4 +1,4 @@
-"""Tests for trainer/data/text_processing.py — tag shuffle and token dropout."""
+"""Tests for trainer/data/text_processing.py - tag shuffle and token dropout."""
 from __future__ import annotations
 
 import pytest
@@ -38,10 +38,10 @@ class TestShuffleTags:
         assert r1 == r2
 
     def test_different_seeds_produce_different_order(self):
-        # Very high probability — 5 tags have 120 permutations.
+        # Very high probability - 5 tags have 120 permutations.
         caption = "a, b, c, d, e"
         results = {shuffle_tags(caption, seed=s) for s in range(20)}
-        assert len(results) > 1, "All seeds produced the same order — shuffling may be broken"
+        assert len(results) > 1, "All seeds produced the same order - shuffling may be broken"
 
     def test_keep_first_n_preserves_leading_tags(self):
         caption = "fixed1, fixed2, a, b, c, d"
@@ -52,7 +52,7 @@ class TestShuffleTags:
             assert tags[1] == "fixed2"
 
     def test_keep_first_n_greater_than_tag_count(self):
-        # Should not crash — just return all tags in original order.
+        # Should not crash - just return all tags in original order.
         caption = "a, b, c"
         result = shuffle_tags(caption, keep_first_n=10, seed=0)
         tags = [t.strip() for t in result.split(",")]

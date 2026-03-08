@@ -3,8 +3,8 @@
 Key differences from HunyuanVideo (original):
 - 54 double-stream blocks (vs 20 in HV)
 - 0 single-stream blocks (HV has 40)
-- patch_size = [1, 1, 1] — no spatial/temporal patching
-- guidance_embed = False — no guidance embedding
+- patch_size = [1, 1, 1] - no spatial/temporal patching
+- guidance_embed = False - no guidance embedding
 - Text encoders: Qwen2.5-VL + ByT5 (vs LLM + CLIP-L in HV)
 """
 from __future__ import annotations
@@ -16,13 +16,13 @@ from dataclasses import dataclass, field
 class HV15ModelConfig:
     """Immutable configuration for HunyuanVideo 1.5 transformer.
 
-    All values are fixed architecture constants — not user-tunable hyperparams.
+    All values are fixed architecture constants - not user-tunable hyperparams.
     """
     # Block counts
     num_double_blocks: int = 54
     num_single_blocks: int = 0       # HV 1.5 has no single-stream blocks
 
-    # Patch size: [temporal, height, width] — no patching at all
+    # Patch size: [temporal, height, width] - no patching at all
     patch_size: list[int] = field(default_factory=lambda: [1, 1, 1])
 
     # Latent channels for I/O (out_channels = in_channels - 1 effectively; model sees concat)
@@ -41,7 +41,7 @@ class HV15ModelConfig:
     qk_norm_type: str = "rms"
     qkv_bias: bool = True
 
-    # Guidance embedding — DISABLED for HV 1.5
+    # Guidance embedding - DISABLED for HV 1.5
     guidance_embed: bool = False
 
     # Text encoder dimensions
@@ -51,7 +51,7 @@ class HV15ModelConfig:
     # Vision states (SigLIP, for I2V)
     vision_states_dim: int = 1152
 
-    # RoPE parameters — 3D positional encoding
+    # RoPE parameters - 3D positional encoding
     rope_dim_list: list[int] = field(default_factory=lambda: [16, 56, 56])
     rope_theta: float = 256.0
 

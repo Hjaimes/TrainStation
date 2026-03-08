@@ -1,8 +1,8 @@
-"""Kandinsky 5 DiT model — TransformerEncoderBlock, TransformerDecoderBlock, DiffusionTransformer3D.
+"""Kandinsky 5 DiT model - TransformerEncoderBlock, TransformerDecoderBlock, DiffusionTransformer3D.
 
 Ported from Musubi_Tuner's kandinsky5/models/dit.py.
 Improvements over source:
-- Removed logging.basicConfig() — logging is configured centrally.
+- Removed logging.basicConfig() - logging is configured centrally.
 - Block-swap logging uses logger.info instead of print.
 - _maybe_compile / apply_* helpers imported from nn.py (no duplication).
 - Removed dead / commented-out code.
@@ -129,7 +129,7 @@ class TransformerDecoderBlock(nn.Module):
 
 
 # ---------------------------------------------------------------------------
-# DiffusionTransformer3D — the top-level DiT model
+# DiffusionTransformer3D - the top-level DiT model
 # ---------------------------------------------------------------------------
 
 class DiffusionTransformer3D(nn.Module):
@@ -387,7 +387,7 @@ class DiffusionTransformer3D(nn.Module):
             use_pinned_memory,
         )
         logger.info(
-            f"Kandinsky5 DiT: block swap enabled — text={text_to_swap}, visual={visual_to_swap}."
+            f"Kandinsky5 DiT: block swap enabled - text={text_to_swap}, visual={visual_to_swap}."
         )
 
     def move_to_device_except_swap_blocks(self, device: torch.device) -> None:

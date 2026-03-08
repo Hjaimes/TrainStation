@@ -19,7 +19,7 @@ A modern AI model training application with a web UI and CLI. Fine-tune diffusio
 | SD3 | Image | Fully implemented |
 | Kandinsky 5 | Image | Fully implemented |
 | Qwen Image | Image | Fully implemented |
-| ZImage | Image | Fully implemented |
+| Z-Image | Image | Fully implemented |
 
 ## Features
 
@@ -46,10 +46,10 @@ A modern AI model training application with a web UI and CLI. Fine-tune diffusio
 
 **UI & Workflow**
 - Web UI with live loss chart and real-time training metrics
-- HuggingFace model IDs — type a repo ID (e.g. `Wan-AI/Wan2.1-T2V-14B`) and it downloads automatically
+- HuggingFace model IDs - type a repo ID (e.g. `Wan-AI/Wan2.1-T2V-14B`) and it downloads automatically
 - Native file/folder browser
-- Preset system — save and load training configurations
-- Training queue — queue multiple runs
+- Preset system - save and load training configurations
+- Training queue - queue multiple runs
 - CLI for headless/scripted training
 
 ## Requirements
@@ -170,9 +170,9 @@ Please keep changes focused and include tests for new functionality.
 
 TrainStation builds on the work of several open-source projects:
 
-- [Musubi Tuner](https://github.com/kohya-ss/musubi-tuner) by kohya-ss — primary reference for model loading, LoRA/LoHa/LoKr networks, dataset handling, and training loops (Apache 2.0)
-- [OneTrainer](https://github.com/Nerogar/OneTrainer) by Nerogar — reference for preset systems, factory patterns, and UI state management (AGPL-3.0)
-- [AI Toolkit](https://github.com/ostris/ai-toolkit) by ostris — reference for YAML config approach and job-based architecture (MIT)
+- [Musubi Tuner](https://github.com/kohya-ss/musubi-tuner) by kohya-ss - primary reference for model loading, LoRA/LoHa/LoKr networks, dataset handling, and training loops (Apache 2.0)
+- [OneTrainer](https://github.com/Nerogar/OneTrainer) by Nerogar - reference for preset systems, factory patterns, and UI state management (AGPL-3.0)
+- [AI Toolkit](https://github.com/ostris/ai-toolkit) by ostris - reference for YAML config approach and job-based architecture (MIT)
 
 ## License
 

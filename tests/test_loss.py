@@ -1,4 +1,4 @@
-"""Tests for trainer/loss.py — configurable loss functions."""
+"""Tests for trainer/loss.py - configurable loss functions."""
 from __future__ import annotations
 
 import functools
@@ -25,7 +25,7 @@ def pred_target() -> tuple[torch.Tensor, torch.Tensor]:
 
 
 # ---------------------------------------------------------------------------
-# get_loss_fn — callable resolution
+# get_loss_fn - callable resolution
 # ---------------------------------------------------------------------------
 
 class TestGetLossFn:
@@ -61,7 +61,7 @@ class TestGetLossFn:
 
 
 # ---------------------------------------------------------------------------
-# Loss correctness — results match torch reference implementations
+# Loss correctness - results match torch reference implementations
 # ---------------------------------------------------------------------------
 
 class TestLossCorrectness:
@@ -111,7 +111,7 @@ class TestLossCorrectness:
 
 
 # ---------------------------------------------------------------------------
-# Scalar output — all loss functions must return 0-dim tensors
+# Scalar output - all loss functions must return 0-dim tensors
 # ---------------------------------------------------------------------------
 
 class TestScalarOutput:
@@ -139,7 +139,7 @@ class TestScalarOutput:
 
 
 # ---------------------------------------------------------------------------
-# compute_loss — convenience wrapper
+# compute_loss - convenience wrapper
 # ---------------------------------------------------------------------------
 
 class TestComputeLoss:

@@ -1,4 +1,4 @@
-"""Weight bouncing — weights on CPU pinned memory, bounced to GPU per layer.
+"""Weight bouncing - weights on CPU pinned memory, bounced to GPU per layer.
 
 Keeps model weights on CPU pinned memory. During forward pass, each layer's
 weights are moved to GPU, used, then moved back. During backward, weights

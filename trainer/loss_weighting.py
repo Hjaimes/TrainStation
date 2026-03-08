@@ -110,7 +110,7 @@ def p2_weights(snr: Tensor, gamma: float = 1.0, k: float = 1.0) -> Tensor:
     focuses training on noisier, perceptually harder timesteps.
 
     Reference: Choi et al. 2022 "Perception Prioritized Training of
-    Diffusion Models" — Eq. (8), denominator form with k=1.
+    Diffusion Models" - Eq. (8), denominator form with k=1.
 
     Args:
         snr:   SNR values, shape (B,). Must be non-negative.

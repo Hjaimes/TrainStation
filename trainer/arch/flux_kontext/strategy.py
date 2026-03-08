@@ -85,14 +85,14 @@ class FluxKontextStrategy(ModelStrategy):
         """Load FluxKontextModel from checkpoint, detect dtype, return ModelComponents.
 
         Config fields used:
-            model.base_model_path    — path to DiT .safetensors
-            model.dtype              — training dtype (bf16, fp16, fp32)
-            model.attn_mode          — attention backend (sdpa, flash, etc.)
-            model.split_attn         — whether to use split attention
-            model.quantization       — None, "fp8", "fp8_scaled"
-            model.block_swap_count   — number of blocks to swap CPU↔GPU
-            model.gradient_checkpointing — enable gradient checkpointing
-            model.model_kwargs       — extra kwargs, e.g. {"model_version": "dev"}
+            model.base_model_path    - path to DiT .safetensors
+            model.dtype              - training dtype (bf16, fp16, fp32)
+            model.attn_mode          - attention backend (sdpa, flash, etc.)
+            model.split_attn         - whether to use split attention
+            model.quantization       - None, "fp8", "fp8_scaled"
+            model.block_swap_count   - number of blocks to swap CPU↔GPU
+            model.gradient_checkpointing - enable gradient checkpointing
+            model.model_kwargs       - extra kwargs, e.g. {"model_version": "dev"}
         """
         from trainer.arch.flux_kontext.components.configs import FLUX_KONTEXT_CONFIGS
         from trainer.arch.flux_kontext.components.model import (
@@ -161,7 +161,7 @@ class FluxKontextStrategy(ModelStrategy):
         dfs = cfg.training.discrete_flow_shift
         flow_shift = math.exp(dfs) if dfs != 0 else 1.0
 
-        # Store strategy state — all read by training_step, never touch Pydantic in hot path
+        # Store strategy state - all read by training_step, never touch Pydantic in hot path
         self._blocks_to_swap = blocks_to_swap
         self._device = device
         self._train_dtype = train_dtype
@@ -228,8 +228,8 @@ class FluxKontextStrategy(ModelStrategy):
         """Sample timesteps for Flux Kontext flow-matching training.
 
         Returns:
-            t:         Float ``(B,)`` in [min_t, max_t] — interpolation coefficient.
-            timesteps: Float ``(B,)`` in [0, 1] — Flux Kontext model receives [0, 1].
+            t:         Float ``(B,)`` in [min_t, max_t] - interpolation coefficient.
+            timesteps: Float ``(B,)`` in [0, 1] - Flux Kontext model receives [0, 1].
         """
         t = self._sample_t(
             bsz, device,
@@ -257,10 +257,10 @@ class FluxKontextStrategy(ModelStrategy):
         """Flow-matching training step for Flux Kontext.
 
         Batch format:
-            latents:         ``(B, 16, H, W)`` — target latents.
-            latents_control: ``(B, 16, H_c, W_c)`` — control image latents.
-            t5_vec:          ``(B, T, 4096)`` — T5-XXL text embeddings.
-            clip_l_pooler:   ``(B, 768)`` — CLIP-L pooled text embedding.
+            latents:         ``(B, 16, H, W)`` - target latents.
+            latents_control: ``(B, 16, H_c, W_c)`` - control image latents.
+            t5_vec:          ``(B, T, 4096)`` - T5-XXL text embeddings.
+            clip_l_pooler:   ``(B, 768)`` - CLIP-L pooled text embedding.
 
         Pipeline:
         1. Pack target latents: ``(B, 16, H, W)`` → ``(B, L_n, 64)``.
@@ -349,7 +349,7 @@ class FluxKontextStrategy(ModelStrategy):
             guidance=guidance_vec,
             control_lengths=control_lengths,
         )
-        # model_pred: (B, L_n+L_c, 64) — includes control portion
+        # model_pred: (B, L_n+L_c, 64) - includes control portion
 
         # --- Slice prediction: remove control tokens ---
         noisy_seq_len = noisy_packed.shape[1]

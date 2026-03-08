@@ -1,4 +1,4 @@
-"""HunyuanVideoTransformer3DModel — main transformer backbone.
+"""HunyuanVideoTransformer3DModel - main transformer backbone.
 
 Ported from Musubi_Tuner's hunyuan_model/models.py (HYVideoDiffusionTransformer).
 Improvements:
@@ -229,7 +229,7 @@ class HunyuanVideoTransformer3DModel(nn.Module):
 
         if double_to_swap >= n_double or single_to_swap >= n_single:
             raise ValueError(
-                f"Cannot swap {double_to_swap} double and {single_to_swap} single blocks — "
+                f"Cannot swap {double_to_swap} double and {single_to_swap} single blocks - "
                 f"max is {n_double - 1} and {n_single - 1} respectively."
             )
 
@@ -242,7 +242,7 @@ class HunyuanVideoTransformer3DModel(nn.Module):
             supports_backward, device, use_pinned_memory,
         )
         logger.info(
-            "HunyuanVideoTransformer3DModel: block swap enabled — "
+            "HunyuanVideoTransformer3DModel: block swap enabled - "
             "%d total (%d double, %d single)", num_blocks, double_to_swap, single_to_swap,
         )
 

@@ -1,4 +1,4 @@
-"""Activation offloading — CPU-offloaded gradient checkpointing.
+"""Activation offloading - CPU-offloaded gradient checkpointing.
 
 Moves saved-for-backward tensors to CPU pinned memory during forward pass,
 pre-fetches back to GPU during backward pass. Reduces GPU VRAM at the cost
@@ -79,7 +79,7 @@ class ActivationOffloadContext:
             """Move tensor back to GPU during backward pass."""
             cpu_tensor, device = packed
             if device.type != "cuda":
-                # Was never on GPU — return as-is.
+                # Was never on GPU - return as-is.
                 return cpu_tensor
 
             if stream is not None:
@@ -100,4 +100,4 @@ class ActivationOffloadContext:
             return
         self._ctx.__exit__(*args)
         self._ctx = None
-        # Keep self._stream alive — reused across enter/exit cycles.
+        # Keep self._stream alive - reused across enter/exit cycles.

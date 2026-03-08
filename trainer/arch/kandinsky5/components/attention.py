@@ -66,7 +66,7 @@ def xformers_attn(q: torch.Tensor, k: torch.Tensor, v: torch.Tensor, attn_mask=N
 
 
 # ---------------------------------------------------------------------------
-# SelfAttentionEngine — unified dispatch object
+# SelfAttentionEngine - unified dispatch object
 # ---------------------------------------------------------------------------
 
 _VALID_ENGINES = frozenset({

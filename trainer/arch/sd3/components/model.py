@@ -154,13 +154,13 @@ class SD3Transformer2DModel(nn.Module):
     ) -> Tensor:
         """
         Args:
-            hidden_states:         (B, 16, H, W) — noisy latents
-            encoder_hidden_states: (B, L, 4096)  — T5-XXL text embeddings
-            timestep:              (B,)           — in [0, 1000]
-            pooled_projections:    (B, 2048)      — CLIP-L + CLIP-G pooled embeddings
+            hidden_states:         (B, 16, H, W) - noisy latents
+            encoder_hidden_states: (B, L, 4096)  - T5-XXL text embeddings
+            timestep:              (B,)           - in [0, 1000]
+            pooled_projections:    (B, 2048)      - CLIP-L + CLIP-G pooled embeddings
 
         Returns:
-            (B, 16, H, W) — predicted velocity (noise - x0)
+            (B, 16, H, W) - predicted velocity (noise - x0)
         """
         B, C, H, W = hidden_states.shape
 

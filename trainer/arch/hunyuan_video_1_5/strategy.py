@@ -4,7 +4,7 @@ Ported from Musubi_Tuner's hv_1_5_train_network.py and hunyuan_video_1_5_models.
 
 Key differences from HunyuanVideo (original):
 - 54 double blocks, 0 single blocks
-- patch_size = [1, 1, 1] — no patching, so seq_len = T*H*W exactly
+- patch_size = [1, 1, 1] - no patching, so seq_len = T*H*W exactly
 - No guidance embedding → forward() has NO guidance parameter
 - Single ModelOffloader (double blocks only)
 - Text encoders: Qwen2.5-VL + ByT5 (embeddings come pre-cached in batch)
@@ -52,7 +52,7 @@ def _pad_varlen(
 
     Returns:
         padded: [B, max_L, D]
-        mask:   [B, max_L] bool — True for valid positions.
+        mask:   [B, max_L] bool - True for valid positions.
     """
     lengths = [t.shape[0] for t in seq_list]
     max_len = max(lengths)
@@ -73,11 +73,11 @@ class HunyuanVideo15Strategy(ModelStrategy):
     """Training strategy for HunyuanVideo 1.5.
 
     Batch keys expected:
-        latents       — [B, 16, T, H, W] VAE latent video
-        latents_image — [B, 17, T, H, W] I2V conditioning (16 + 1 mask); or absent for T2V
-        vl_embed      — list of [L_i, 3584] Qwen2.5-VL embeddings
-        byt5_embed    — list of [L_i, 1472] ByT5 embeddings
-        siglip        — [B, V, 1152] SigLIP image embeddings (I2V, optional)
+        latents       - [B, 16, T, H, W] VAE latent video
+        latents_image - [B, 17, T, H, W] I2V conditioning (16 + 1 mask); or absent for T2V
+        vl_embed      - list of [L_i, 3584] Qwen2.5-VL embeddings
+        byt5_embed    - list of [L_i, 1472] ByT5 embeddings
+        siglip        - [B, V, 1152] SigLIP image embeddings (I2V, optional)
     """
 
     @property
@@ -96,14 +96,14 @@ class HunyuanVideo15Strategy(ModelStrategy):
         """Load HunyuanVideo 1.5 transformer from checkpoint.
 
         Config fields used:
-            model.base_model_path     — path to DiT .safetensors
-            model.dtype               — training dtype (bf16, fp16, fp32)
-            model.attn_mode           — attention backend
-            model.split_attn          — split-attention flag
-            model.quantization        — None or "fp8_scaled"
-            model.block_swap_count    — number of double blocks to swap CPU↔GPU
-            model.gradient_checkpointing — enable gradient checkpointing
-            model.model_kwargs.task   — "t2v" (default) or "i2v"
+            model.base_model_path     - path to DiT .safetensors
+            model.dtype               - training dtype (bf16, fp16, fp32)
+            model.attn_mode           - attention backend
+            model.split_attn          - split-attention flag
+            model.quantization        - None or "fp8_scaled"
+            model.block_swap_count    - number of double blocks to swap CPU↔GPU
+            model.gradient_checkpointing - enable gradient checkpointing
+            model.model_kwargs.task   - "t2v" (default) or "i2v"
         """
         from trainer.arch.hunyuan_video_1_5.components.model import (
             HunyuanVideo15Transformer,
@@ -219,8 +219,8 @@ class HunyuanVideo15Strategy(ModelStrategy):
         """Sample timesteps for HunyuanVideo 1.5 flow matching training.
 
         Returns:
-            t: [B] float in [min_t, max_t] — interpolation coefficient.
-            timesteps: [B] float in [1, 1001] — model's expected range.
+            t: [B] float in [min_t, max_t] - interpolation coefficient.
+            timesteps: [B] float in [1, 1001] - model's expected range.
         """
         t = self._sample_t(
             bsz, device,
@@ -252,7 +252,7 @@ class HunyuanVideo15Strategy(ModelStrategy):
         2. Build I2V conditioning tensor (or zeros for T2V).
         3. Sample noise and timesteps.
         4. Create noisy latents via linear interpolation.
-        5. Forward: model(concat(noisy, cond), t, text_states, ...) — NO guidance param.
+        5. Forward: model(concat(noisy, cond), t, text_states, ...) - NO guidance param.
         6. MSE loss against target = noise - latents.
         """
         device = self._device

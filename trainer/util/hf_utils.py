@@ -31,7 +31,7 @@ def is_huggingface_id(path: str) -> bool:
     # Windows drive letter (C:, D:, etc.)
     if len(path) >= 2 and path[1] == ":" and path[0].isalpha():
         return False
-    # Contains backslashes — filesystem path
+    # Contains backslashes - filesystem path
     if "\\" in path:
         return False
 
@@ -111,7 +111,7 @@ def find_safetensors_in_dir(directory: str) -> str | None:
     if not safetensors_files:
         return None
 
-    # Single file — return it directly
+    # Single file - return it directly
     if len(safetensors_files) == 1:
         return str(safetensors_files[0])
 
@@ -120,6 +120,6 @@ def find_safetensors_in_dir(directory: str) -> str | None:
     if index_file.exists():
         return str(dir_path)  # Return directory for sharded models
 
-    # Multiple files without index — return the largest one
+    # Multiple files without index - return the largest one
     largest = max(safetensors_files, key=lambda f: f.stat().st_size)
     return str(largest)

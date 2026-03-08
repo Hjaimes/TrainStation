@@ -103,14 +103,14 @@ class TestApplyProgressiveBlend:
         t = torch.rand(16)
         # At exactly warmup_steps
         result_at = ModelStrategy._apply_progressive_blend(t, step=1000, warmup_steps=1000)
-        assert result_at is t  # same object — no copy
+        assert result_at is t  # same object - no copy
 
         # After warmup
         result_after = ModelStrategy._apply_progressive_blend(t, step=2000, warmup_steps=1000)
         assert result_after is t
 
     def test_no_op_when_warmup_steps_zero(self):
-        """warmup_steps=0 means no warmup at all — return t unchanged."""
+        """warmup_steps=0 means no warmup at all - return t unchanged."""
         t = torch.rand(8)
         result = ModelStrategy._apply_progressive_blend(t, step=0, warmup_steps=0)
         assert result is t

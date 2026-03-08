@@ -1,0 +1,31 @@
+# Flux 1 Dev - LoRA (12GB VRAM)
+# FP8 quantization + block swap to fit in 12GB
+model:
+  architecture: flux_1
+  dtype: bf16
+  quantization: fp8
+  gradient_checkpointing: true
+  block_swap_count: 8
+  model_kwargs:
+    task: dev
+training:
+  method: lora
+  batch_size: 1
+  gradient_accumulation_steps: 2
+  mixed_precision: bf16
+optimizer:
+  optimizer_type: adamw8bit
+  learning_rate: 1.0e-4
+  scheduler_type: cosine
+  warmup_steps: 50
+network:
+  network_type: lora
+  rank: 16
+  alpha: 16
+saving:
+  save_every_n_epochs: 1
+sampling:
+  guidance_scale: 4.0
+  num_inference_steps: 20
+  width: 768
+  height: 768

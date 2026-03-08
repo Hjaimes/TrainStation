@@ -241,7 +241,7 @@ def get_nd_rotary_pos_embed(
 
     Args:
         rope_dim_list: Per-axis embedding dims, must sum to head_dim.
-        start: Grid start (int or tuple) — see get_meshgrid_nd.
+        start: Grid start (int or tuple) - see get_meshgrid_nd.
         *args: Additional grid args.
         theta: Base frequency.
         use_real: Return (cos, sin) instead of complex tensor.

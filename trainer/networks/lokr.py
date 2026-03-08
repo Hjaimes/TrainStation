@@ -1,5 +1,5 @@
 # LoKr (Low-rank Kronecker Product) network module
-# Ported from Musubi_Tuner — math/forward logic identical to source.
+# Ported from Musubi_Tuner - math/forward logic identical to source.
 # Linear layers only (no Conv2d/Tucker decomposition).
 #
 # Reference: https://arxiv.org/abs/2309.14859

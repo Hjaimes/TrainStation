@@ -1,11 +1,11 @@
 """Tests for HunyuanVideo architecture components.
 
 Test levels:
-  1. Import check — all modules import without error
-  2. Config validation — correct block counts and dimensions
-  3. Registry — hunyuan_video is discovered and resolves correctly
-  4. Strategy properties — architecture name, supports_video
-  5. Training step — mock forward produces scalar finite loss
+  1. Import check - all modules import without error
+  2. Config validation - correct block counts and dimensions
+  3. Registry - hunyuan_video is discovered and resolves correctly
+  4. Strategy properties - architecture name, supports_video
+  5. Training step - mock forward produces scalar finite loss
 """
 from __future__ import annotations
 
@@ -257,7 +257,7 @@ class TestBlocks:
     TXT_LEN = 8
 
     def _make_cu_seqlens(self, batch_size: int, img_len: int, txt_len: int) -> torch.Tensor:
-        """Build cu_seqlens for single-item batch (no varlen — same lengths)."""
+        """Build cu_seqlens for single-item batch (no varlen - same lengths)."""
         total = img_len + txt_len
         cu = torch.zeros(2 * batch_size + 1, dtype=torch.int32)
         for i in range(batch_size):

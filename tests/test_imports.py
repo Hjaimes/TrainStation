@@ -416,3 +416,7 @@ def test_import_ui_routes_browse():
 
 def test_import_util_hf_utils():
     from trainer.util.hf_utils import is_huggingface_id, resolve_path_if_hf, find_safetensors_in_dir
+
+
+def test_import_adamw_advanced():
+    from trainer.adamw_advanced import AdamWAdvanced

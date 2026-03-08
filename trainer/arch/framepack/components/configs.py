@@ -13,7 +13,7 @@ def _ns(**kwargs) -> SimpleNamespace:
 
 
 # ---------------------------------------------------------------------------
-# FramePack model configuration (single variant — always I2V HunyuanVideo)
+# FramePack model configuration (single variant - always I2V HunyuanVideo)
 # ---------------------------------------------------------------------------
 
 # Architecture dimensions from load_packed_model in Musubi_Tuner:

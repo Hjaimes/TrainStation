@@ -1,7 +1,7 @@
 """Configurable loss functions for training.
 
 All loss functions accept (pred, target) tensors and return a scalar loss.
-Functions are resolved once at setup time and cached — no per-step dispatch.
+Functions are resolved once at setup time and cached - no per-step dispatch.
 """
 from __future__ import annotations
 

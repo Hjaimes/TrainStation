@@ -197,7 +197,7 @@ class TestFilenameParsing:
 
     def test_parse_rejects_te_files(self):
         """TE cache files end with _wan_te, the stem without .safetensors
-        would be my_image_wan_te — parser sees _te as arch suffix != wan."""
+        would be my_image_wan_te - parser sees _te as arch suffix != wan."""
         # The glob pattern *_wan.safetensors won't match *_wan_te.safetensors,
         # so this case doesn't arise in practice. But verify parsing rejects it.
         result = self.ds._parse_latent_filename("my_image_wan_te")

@@ -1,7 +1,7 @@
 """FramePack temporal packing utilities and RoPE helpers.
 
 Ported from Musubi_Tuner frame_pack/hunyuan_video_packed.py and frame_pack/utils.py.
-Self-contained — no imports from any other architecture module.
+Self-contained - no imports from any other architecture module.
 
 Porting improvements applied:
 - print() -> logger.info()/logger.warning()
@@ -159,7 +159,7 @@ class HunyuanVideoRotaryPosEmbed(nn.Module):
         """Compute batched RoPE frequencies.
 
         Args:
-            frame_indices: [B, T] — each row is one sample's frame positions
+            frame_indices: [B, T] - each row is one sample's frame positions
             height, width: post-patch spatial dimensions
             device: target device
 
@@ -183,7 +183,7 @@ def crop_or_pad_yield_mask(x: torch.Tensor, length: int) -> tuple[torch.Tensor, 
         length: target sequence length
 
     Returns:
-        (padded_x, mask) — mask is [B, length] bool, True where content exists
+        (padded_x, mask) - mask is [B, length] bool, True where content exists
     """
     b, f, c = x.shape
     device = x.device

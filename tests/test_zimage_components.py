@@ -1,10 +1,10 @@
 """Z-Image architecture component tests.
 
 Tests follow the same pattern as test_wan_components.py:
-  TestConfigs      — config constants and registry dict
-  TestRegistry     — decorator-based registry discovery
-  TinyMockZImage   — minimal mock matching ZImageTransformer2DModel forward sig
-  TestTrainingStep — strategy.training_step() with mock model, synthetic batch
+  TestConfigs      - config constants and registry dict
+  TestRegistry     - decorator-based registry discovery
+  TinyMockZImage   - minimal mock matching ZImageTransformer2DModel forward sig
+  TestTrainingStep - strategy.training_step() with mock model, synthetic batch
 """
 from __future__ import annotations
 
@@ -123,7 +123,7 @@ class TestRegistry:
 
 
 # ---------------------------------------------------------------------------
-# Tiny mock model — same forward signature as ZImageTransformer2DModel
+# Tiny mock model - same forward signature as ZImageTransformer2DModel
 # ---------------------------------------------------------------------------
 
 class TinyMockZImage(nn.Module):
@@ -174,7 +174,7 @@ class TinyMockZImage(nn.Module):
 
 
 # ---------------------------------------------------------------------------
-# Mock setup helper — sets ALL self._* attributes that setup() would set
+# Mock setup helper - sets ALL self._* attributes that setup() would set
 # ---------------------------------------------------------------------------
 
 def _mock_setup_zimage(strategy) -> "ModelComponents":
@@ -240,7 +240,7 @@ class TestTrainingStep:
         strategy = ZImageStrategy(config)
         components = _mock_setup_zimage(strategy)
 
-        # Synthetic batch — image only (4D latents [B, C, H, W])
+        # Synthetic batch - image only (4D latents [B, C, H, W])
         batch = {
             "latents": torch.randn(2, 16, 32, 32),   # [B, C, H, W]
             "llm_embed": [

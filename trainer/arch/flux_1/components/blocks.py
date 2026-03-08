@@ -45,7 +45,7 @@ def _apply_rope_flux1(q: Tensor, k: Tensor, rope: Tensor) -> tuple[Tensor, Tenso
     Returns:
         Tuple of rotated (q, k) tensors.
     """
-    # rope: (B, N, D) — need to expand heads dimension
+    # rope: (B, N, D) - need to expand heads dimension
     # Split into cos and sin halves
     cos = rope[..., : rope.shape[-1] // 2]  # (B, N, D//2)
     sin = rope[..., rope.shape[-1] // 2 :]  # (B, N, D//2)
@@ -141,7 +141,7 @@ class _Modulation(nn.Module):
 
 
 # ---------------------------------------------------------------------------
-# Flux1DoubleStreamBlock — joint image+text attention with per-block modulation
+# Flux1DoubleStreamBlock - joint image+text attention with per-block modulation
 # ---------------------------------------------------------------------------
 
 class Flux1DoubleStreamBlock(nn.Module):
@@ -243,12 +243,12 @@ class Flux1DoubleStreamBlock(nn.Module):
 
         txt_len = txt_q.shape[2]
 
-        # --- Joint attention (txt first, then img — matches reference) ---
+        # --- Joint attention (txt first, then img - matches reference) ---
         q = torch.cat([txt_q, img_q], dim=2)  # (B, H, L_txt+L_img, D)
         k = torch.cat([txt_k, img_k], dim=2)
         v = torch.cat([txt_v, img_v], dim=2)
 
-        # SDPA: inputs are (B, H, L, D) — already in correct format
+        # SDPA: inputs are (B, H, L, D) - already in correct format
         attn = F.scaled_dot_product_attention(q, k, v)  # (B, H, L, D)
         attn = attn.transpose(1, 2)  # (B, L, H, D)
 
@@ -288,7 +288,7 @@ class Flux1DoubleStreamBlock(nn.Module):
 
 
 # ---------------------------------------------------------------------------
-# Flux1SingleStreamBlock — merged sequence with per-block modulation
+# Flux1SingleStreamBlock - merged sequence with per-block modulation
 # ---------------------------------------------------------------------------
 
 class Flux1SingleStreamBlock(nn.Module):

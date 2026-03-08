@@ -49,7 +49,7 @@ FP8_OPTIMIZATION_EXCLUDE_KEYS = ["norm", "mod", "modulation"]
 
 
 # ---------------------------------------------------------------------------
-# RoPE helpers — math unchanged from reference, just cleaned up
+# RoPE helpers - math unchanged from reference, just cleaned up
 # ---------------------------------------------------------------------------
 
 def _rope(pos: Tensor, dim: int, theta: int) -> Tensor:
@@ -482,7 +482,7 @@ class SingleStreamBlock(nn.Module):
 
 
 # ---------------------------------------------------------------------------
-# FluxKontextModel — main transformer
+# FluxKontextModel - main transformer
 # ---------------------------------------------------------------------------
 
 class FluxKontextModel(nn.Module):
@@ -644,7 +644,7 @@ class FluxKontextModel(nn.Module):
             supports_backward, device, use_pinned_memory,
         )
         logger.info(
-            "FluxKontext: block swap enabled — total=%d, double=%d, single=%d",
+            "FluxKontext: block swap enabled - total=%d, double=%d, single=%d",
             num_blocks, double_to_swap, single_to_swap,
         )
 
@@ -685,18 +685,18 @@ class FluxKontextModel(nn.Module):
         """Forward pass.
 
         Args:
-            img:             ``(B, L_img, C)`` — packed image tokens (64 channels).
+            img:             ``(B, L_img, C)`` - packed image tokens (64 channels).
                              For Kontext, L_img = L_noisy + L_ctrl (concatenated).
-            img_ids:         ``(B, L_img, 3)`` — 3-axis image position IDs.
-            txt:             ``(B, L_txt, 4096)`` — T5-XXL text embeddings.
-            txt_ids:         ``(B, L_txt, 3)`` — text position IDs (all zeros).
-            timesteps:       ``(B,)`` — float timesteps in [0, 1].
-            y:               ``(B, 768)`` — CLIP-L pooled text embedding.
-            guidance:        ``(B,)`` — guidance scale vector (use 1.0 for training).
+            img_ids:         ``(B, L_img, 3)`` - 3-axis image position IDs.
+            txt:             ``(B, L_txt, 4096)`` - T5-XXL text embeddings.
+            txt_ids:         ``(B, L_txt, 3)`` - text position IDs (all zeros).
+            timesteps:       ``(B,)`` - float timesteps in [0, 1].
+            y:               ``(B, 768)`` - CLIP-L pooled text embedding.
+            guidance:        ``(B,)`` - guidance scale vector (use 1.0 for training).
             control_lengths: List of per-sample control sequence lengths, or None.
 
         Returns:
-            ``(B, L_img, C)`` — predicted velocity field (full sequence, incl. control).
+            ``(B, L_img, C)`` - predicted velocity field (full sequence, incl. control).
             The strategy must slice ``[:, :L_noisy]`` before computing loss.
         """
         if img.ndim != 3 or txt.ndim != 3:
@@ -793,7 +793,7 @@ def load_flux_kontext_model(
         config:           Variant configuration (dimensions).
         device:           Target CUDA/CPU device.
         dit_path:         Path to ``.safetensors`` weights.
-        attn_mode:        Attention backend (currently ignored — uses SDPA internally).
+        attn_mode:        Attention backend (currently ignored - uses SDPA internally).
         split_attn:       Whether to use split attention (currently ignored).
         loading_device:   Device to load weights onto (CPU for block-swap).
         dit_weight_dtype: Weight dtype. ``None`` only when ``fp8_scaled=True``.

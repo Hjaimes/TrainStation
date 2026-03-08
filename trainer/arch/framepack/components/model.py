@@ -1,4 +1,4 @@
-"""HunyuanVideoTransformer3DModelPacked — FramePack's main DiT model.
+"""HunyuanVideoTransformer3DModelPacked - FramePack's main DiT model.
 
 Ported from Musubi_Tuner/src/musubi_tuner/frame_pack/hunyuan_video_packed.py.
 Original code: https://github.com/lllyasviel/FramePack (Apache-2.0)

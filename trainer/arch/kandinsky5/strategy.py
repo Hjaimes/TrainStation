@@ -79,13 +79,13 @@ class Kandinsky5Strategy(ModelStrategy):
         """Load DiffusionTransformer3D from checkpoint, return ModelComponents.
 
         Config fields used:
-            model.base_model_path     — path to DiT .safetensors
-            model.dtype               — training dtype (bf16, fp16, fp32)
-            model.attn_mode           — attention engine (sdpa, flash, etc.)
-            model.quantization        — None or "fp8_scaled"
-            model.block_swap_count    — number of blocks to swap CPU↔GPU
-            model.gradient_checkpointing — enable gradient checkpointing
-            model.model_kwargs        — must contain "task" key (e.g. "k5-lite-t2v-5s-sd")
+            model.base_model_path     - path to DiT .safetensors
+            model.dtype               - training dtype (bf16, fp16, fp32)
+            model.attn_mode           - attention engine (sdpa, flash, etc.)
+            model.quantization        - None or "fp8_scaled"
+            model.block_swap_count    - number of blocks to swap CPU↔GPU
+            model.gradient_checkpointing - enable gradient checkpointing
+            model.model_kwargs        - must contain "task" key (e.g. "k5-lite-t2v-5s-sd")
         """
         from trainer.arch.kandinsky5.components.configs import TASK_CONFIGS
         from trainer.arch.kandinsky5.components.model import DiffusionTransformer3D
@@ -147,7 +147,7 @@ class Kandinsky5Strategy(ModelStrategy):
                 logger.warning(f"Could not load DiT weights from {dit_path}: {exc}")
         else:
             logger.info(
-                "Kandinsky5 DiT: no checkpoint path provided or file not found — "
+                "Kandinsky5 DiT: no checkpoint path provided or file not found - "
                 "using randomly-initialised weights (test / dry-run mode)."
             )
 
@@ -253,8 +253,8 @@ class Kandinsky5Strategy(ModelStrategy):
         """Sample timesteps for Kandinsky5 flow-matching training.
 
         Returns:
-            t: Float [B] in [min_t, max_t] — interpolation coefficient.
-            timesteps: Float [B] scaled to [1, 1001] — passed to the model.
+            t: Float [B] in [min_t, max_t] - interpolation coefficient.
+            timesteps: Float [B] scaled to [1, 1001] - passed to the model.
         """
         t = self._sample_t(
             bsz, device,
@@ -398,7 +398,7 @@ class Kandinsky5Strategy(ModelStrategy):
                     text_b = text_b[mask_b_flat]
                 elif mask_b_flat.sum().item() == text_b.shape[0]:
                     text_b = text_b
-                mask_b = None  # consumed — don't pass again to avoid shape mismatch
+                mask_b = None  # consumed - don't pass again to avoid shape mismatch
 
             # Determine layout: 4-D = video (C, F, H, W), 3-D = image (C, H, W)
             if latent_b.dim() == 4:

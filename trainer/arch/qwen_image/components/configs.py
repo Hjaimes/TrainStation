@@ -1,9 +1,9 @@
 """QwenImage model configuration presets.
 
 Three modes are supported:
-    t2i     — text-to-image (default)
-    edit    — image editing with control image(s)
-    layered — layered image generation (multi-layer)
+    t2i     - text-to-image (default)
+    edit    - image editing with control image(s)
+    layered - layered image generation (multi-layer)
 
 Model architecture is fixed: 60 transformer blocks, 24 heads × 128 dim = 3072 inner_dim,
 joint_attention_dim = 3584 (Qwen2.5-VL embedding dimension), in_channels = 64 (patchified).
@@ -64,7 +64,7 @@ t2i = _make_config(
     use_layer3d_rope=False,
 )
 
-# Image editing — uses control images concatenated in sequence dimension
+# Image editing - uses control images concatenated in sequence dimension
 edit = _make_config(
     "Config: QwenImage Edit",
     mode="edit",
@@ -73,7 +73,7 @@ edit = _make_config(
     use_layer3d_rope=False,
 )
 
-# Edit-2511 variant — uses zero conditioning for time (zero_cond_t=True)
+# Edit-2511 variant - uses zero conditioning for time (zero_cond_t=True)
 edit_2511 = _make_config(
     "Config: QwenImage Edit-2511",
     mode="edit",
@@ -82,7 +82,7 @@ edit_2511 = _make_config(
     use_layer3d_rope=False,
 )
 
-# Layered generation — uses 3D Layer RoPE and additional time conditioning
+# Layered generation - uses 3D Layer RoPE and additional time conditioning
 layered = _make_config(
     "Config: QwenImage Layered",
     mode="layered",

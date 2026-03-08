@@ -2,7 +2,7 @@
 
 Key differences from Flux 2:
 - Pack 16ch latents with 2x2 spatial patches -> 64ch (not 128ch from 128ch latents)
-- 3D position IDs (channel, y, x) — not 4D (t, h, w, l) as in Flux 2
+- 3D position IDs (channel, y, x) - not 4D (t, h, w, l) as in Flux 2
 - No temporal dimension (image-only model)
 """
 from __future__ import annotations
@@ -53,7 +53,7 @@ def prepare_img_ids(h: int, w: int) -> Tensor:
 def prepare_txt_ids(seq_len: int) -> Tensor:
     """Create 3D position IDs for text tokens: (1, seq_len, 3). All zeros.
 
-    Text tokens do not have spatial positions — all zeros signals to RoPE
+    Text tokens do not have spatial positions - all zeros signals to RoPE
     that they share the same "origin" position.
 
     Returns:

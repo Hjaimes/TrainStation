@@ -66,14 +66,14 @@ class ZImageStrategy(ModelStrategy):
         """Load ZImageTransformer2DModel from checkpoint, return ModelComponents.
 
         Config fields used:
-            model.base_model_path   — path to transformer .safetensors
-            model.dtype             — training dtype (bf16, fp16, fp32)
-            model.attn_mode         — attention backend
-            model.split_attn        — split attention (no attn mask)
-            model.quantization      — None or "fp8_scaled"
-            model.block_swap_count  — CPU↔GPU block swapping
-            model.gradient_checkpointing — enable gradient checkpointing
-            model.model_kwargs      — extra kwargs, e.g. {"use_16bit_attn": True}
+            model.base_model_path   - path to transformer .safetensors
+            model.dtype             - training dtype (bf16, fp16, fp32)
+            model.attn_mode         - attention backend
+            model.split_attn        - split attention (no attn mask)
+            model.quantization      - None or "fp8_scaled"
+            model.block_swap_count  - CPU↔GPU block swapping
+            model.gradient_checkpointing - enable gradient checkpointing
+            model.model_kwargs      - extra kwargs, e.g. {"use_16bit_attn": True}
         """
         from trainer.arch.zimage.components.configs import ZIMAGE_DEFAULT_CONFIG
         from trainer.arch.zimage.components.model import (
@@ -202,8 +202,8 @@ class ZImageStrategy(ModelStrategy):
         """Sample timesteps for Z-Image flow matching training.
 
         Returns:
-            t:         Float [B] in [min_t, max_t] — interpolation coefficient.
-            timesteps: Float [B] in [1, 1001] — Z-Image reversed timestep: model
+            t:         Float [B] in [min_t, max_t] - interpolation coefficient.
+            timesteps: Float [B] in [1, 1001] - Z-Image reversed timestep: model
                        receives (1000 - timesteps) / 1000.
         """
         t = self._sample_t(
@@ -246,7 +246,7 @@ class ZImageStrategy(ModelStrategy):
         # --- Extract batch ---
         latents = batch["latents"].to(device=device, dtype=train_dtype)
 
-        # Z-Image latents are [B, C, H, W] — add frame dim for the model
+        # Z-Image latents are [B, C, H, W] - add frame dim for the model
         if latents.dim() == 4:
             latents = latents.unsqueeze(2)  # [B, C, 1, H, W]
         # If already 5D (F=1 from cache), pass through as-is
@@ -305,7 +305,7 @@ class ZImageStrategy(ModelStrategy):
         noisy_model_input = (1 - t_expanded) * latents + t_expanded * noise
 
         # --- Reversed timestep (Z-Image specific) ---
-        # Model expects t in [0, 1] where 0 = clean, 1 = noise — opposite of standard
+        # Model expects t in [0, 1] where 0 = clean, 1 = noise - opposite of standard
         t_model = ((1000.0 - timesteps) / 1000.0).to(dtype=train_dtype)
 
         # --- Forward pass ---
@@ -315,7 +315,7 @@ class ZImageStrategy(ModelStrategy):
             cap_feats=cap_feats,
             cap_mask=cap_mask,
         )
-        # model_pred: [B, C, F, H, W] — squeeze frame dim
+        # model_pred: [B, C, F, H, W] - squeeze frame dim
         model_pred = model_pred.squeeze(2)           # [B, C, H, W]
 
         # --- Loss ---

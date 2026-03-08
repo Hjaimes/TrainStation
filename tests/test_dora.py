@@ -95,7 +95,7 @@ class TestDoRAForwardShape:
 
 
 # ---------------------------------------------------------------------------
-# 2. Backward — gradients on all trainable params
+# 2. Backward - gradients on all trainable params
 # ---------------------------------------------------------------------------
 
 class TestDoRABackward:

@@ -23,7 +23,7 @@ ARCH_NETWORK_CONFIGS: Dict[str, ArchNetworkConfig] = {
             r".*(patch_embedding|text_embedding|time_embedding|time_projection|norm|head).*",
         ],
     },
-    # HunyuanVideo (original — has both MMDoubleStreamBlock and MMSingleStreamBlock)
+    # HunyuanVideo (original - has both MMDoubleStreamBlock and MMSingleStreamBlock)
     "hunyuan_video": {
         "target_modules": ["MMDoubleStreamBlock", "MMSingleStreamBlock"],
         "default_exclude_patterns": [
@@ -93,14 +93,14 @@ ARCH_NETWORK_CONFIGS: Dict[str, ArchNetworkConfig] = {
             r".*(_modulation|_refiner).*",
         ],
     },
-    # SDXL (UNet-based — targets diffusers Transformer2DModel blocks)
+    # SDXL (UNet-based - targets diffusers Transformer2DModel blocks)
     "sdxl": {
         "target_modules": ["Transformer2DModel"],
         "default_exclude_patterns": [
             r".*norm.*",
         ],
     },
-    # SD3 (MMDiT — targets joint + single transformer blocks)
+    # SD3 (MMDiT - targets joint + single transformer blocks)
     "sd3": {
         "target_modules": ["JointTransformerBlock", "SD3SingleTransformerBlock"],
         "default_exclude_patterns": [

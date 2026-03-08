@@ -52,7 +52,7 @@ class TrainingConfig(BaseModel):
     guidance_scale: float = 1.0
     ema_enabled: bool = False
     ema_decay: float = 0.9999
-    ema_device: str = "cpu"                      # cpu or cuda — cpu avoids doubling VRAM
+    ema_device: str = "cpu"                      # cpu or cuda - cpu avoids doubling VRAM
     resume_from: str | None = None
     noise_offset_type: str = "simple"            # "simple" or "generalized" (psi(t) = offset * sqrt(t))
     dynamic_timestep_shift: bool = False         # Enable resolution-dependent timestep shifting (Flux/SD3 style)
@@ -78,7 +78,7 @@ class OptimizerConfig(BaseModel):
     warmup_steps: int = 0
     warmup_ratio: float = 0.0
     min_lr_ratio: float = 0.0
-    lr_scaling: str = "none"                     # none, linear, sqrt — scales lr by effective batch size
+    lr_scaling: str = "none"                     # none, linear, sqrt - scales lr by effective batch size
     optimizer_kwargs: dict[str, Any] = Field(default_factory=dict)
     component_lr_overrides: dict[str, float] | None = None  # e.g. {"text_encoder": 1e-5, "norm": 5e-5}
 

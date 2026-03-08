@@ -58,14 +58,14 @@ class Flux2Strategy(ModelStrategy):
         """Load Flux2Model from checkpoint, detect dtype, return ModelComponents.
 
         Config fields used:
-            model.base_model_path    — path to DiT .safetensors
-            model.dtype              — training dtype (bf16, fp16, fp32)
-            model.attn_mode          — attention backend (sdpa, flash, etc.)
-            model.split_attn         — whether to use split attention
-            model.quantization       — None, "fp8", "fp8_scaled"
-            model.block_swap_count   — number of blocks to swap CPU↔GPU
-            model.gradient_checkpointing — enable gradient checkpointing
-            model.model_kwargs       — extra kwargs, e.g. {"model_version": "dev"}
+            model.base_model_path    - path to DiT .safetensors
+            model.dtype              - training dtype (bf16, fp16, fp32)
+            model.attn_mode          - attention backend (sdpa, flash, etc.)
+            model.split_attn         - whether to use split attention
+            model.quantization       - None, "fp8", "fp8_scaled"
+            model.block_swap_count   - number of blocks to swap CPU↔GPU
+            model.gradient_checkpointing - enable gradient checkpointing
+            model.model_kwargs       - extra kwargs, e.g. {"model_version": "dev"}
         """
         from trainer.arch.flux_2.components.configs import FLUX2_CONFIGS
         from trainer.arch.flux_2.components.model import (
@@ -198,8 +198,8 @@ class Flux2Strategy(ModelStrategy):
         """Sample timesteps for Flux 2 flow-matching training.
 
         Returns:
-            t:         Float [B] in [min_t, max_t] — interpolation coefficient.
-            timesteps: Float [B] in [0, 1] — Flux 2 model receives timesteps in [0, 1].
+            t:         Float [B] in [min_t, max_t] - interpolation coefficient.
+            timesteps: Float [B] in [0, 1] - Flux 2 model receives timesteps in [0, 1].
         """
         t = self._sample_t(
             bsz, device,
@@ -227,8 +227,8 @@ class Flux2Strategy(ModelStrategy):
         """Flow-matching training step for Flux 2.
 
         Batch format:
-            latents:  ``(B, 128, H, W)`` — 128-channel packed latents.
-            ctx_vec:  ``(B, L, D)``       — text embeddings from Mistral3/Qwen3.
+            latents:  ``(B, 128, H, W)`` - 128-channel packed latents.
+            ctx_vec:  ``(B, L, D)``       - text embeddings from Mistral3/Qwen3.
 
         Pipeline:
         1. Pack spatial dims: ``(B, 128, H, W)`` → ``(B, HW, 128)`` + position IDs.
@@ -242,7 +242,7 @@ class Flux2Strategy(ModelStrategy):
 
         # --- Extract batch ---
         latents = batch["latents"].to(device=device, dtype=train_dtype)
-        # Latents are (B, 128, H, W) — packed 128-channel format
+        # Latents are (B, 128, H, W) - packed 128-channel format
         packed_latent_h = latents.shape[2]
         packed_latent_w = latents.shape[3]
 
@@ -277,7 +277,7 @@ class Flux2Strategy(ModelStrategy):
             guidance_vec = torch.ones(bsz, device=device, dtype=train_dtype)
 
         # --- Forward pass ---
-        # Flux2Model returns (B, HW, 128) — a single tensor (not a list like Wan)
+        # Flux2Model returns (B, HW, 128) - a single tensor (not a list like Wan)
         model_pred = components.model(
             x=noisy_packed,
             x_ids=img_ids,

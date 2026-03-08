@@ -1,0 +1,34 @@
+# SDXL Base - LoRA (24GB VRAM)
+# SDXL is relatively lightweight; no quantization needed
+model:
+  architecture: sdxl
+  dtype: bf16
+  gradient_checkpointing: true
+  model_kwargs:
+    task: base
+training:
+  method: lora
+  batch_size: 1
+  gradient_accumulation_steps: 1
+  mixed_precision: bf16
+  weighting_scheme: min_snr_gamma
+  snr_gamma: 5.0
+optimizer:
+  optimizer_type: adamw8bit
+  learning_rate: 1.0e-4
+  scheduler_type: cosine
+  warmup_steps: 100
+network:
+  network_type: lora
+  rank: 16
+  alpha: 16
+saving:
+  save_every_n_epochs: 1
+data:
+  resolution: 1024
+  enable_bucket: true
+sampling:
+  guidance_scale: 7.0
+  num_inference_steps: 25
+  width: 1024
+  height: 1024

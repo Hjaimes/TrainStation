@@ -109,7 +109,7 @@ class TestUtils:
 
 
 # ---------------------------------------------------------------------------
-# TinyMockFluxKontext — minimal model for training_step testing
+# TinyMockFluxKontext - minimal model for training_step testing
 # ---------------------------------------------------------------------------
 
 class TinyMockFluxKontext(nn.Module):
@@ -138,7 +138,7 @@ class TinyMockFluxKontext(nn.Module):
         guidance: torch.Tensor | None = None,
         control_lengths: list[int] | None = None,
     ) -> torch.Tensor:
-        # img: (B, L, C) — operate on channel dim and return same shape
+        # img: (B, L, C) - operate on channel dim and return same shape
         return self.linear(img.float()).to(img.dtype)
 
     def enable_gradient_checkpointing(self) -> None:
@@ -373,7 +373,7 @@ class TestTrainingStep:
 
 
 # ---------------------------------------------------------------------------
-# TestModelForward — minimal FluxKontextModel forward (tiny dims for speed)
+# TestModelForward - minimal FluxKontextModel forward (tiny dims for speed)
 # ---------------------------------------------------------------------------
 
 class TestModelForward:

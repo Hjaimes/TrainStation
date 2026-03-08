@@ -100,6 +100,11 @@ def _get_schedule_free_adamw() -> type[torch.optim.Optimizer]:
     return AdamWScheduleFree
 
 
+def _get_adamw_advanced() -> type[torch.optim.Optimizer]:
+    from trainer.adamw_advanced import AdamWAdvanced
+    return AdamWAdvanced
+
+
 # ---------------------------------------------------------------------------
 # Registry
 # ---------------------------------------------------------------------------
@@ -114,6 +119,7 @@ OPTIMIZERS: dict[str, Callable[[], type[torch.optim.Optimizer]]] = {
     "lion": _get_lion,
     "came": _get_came,
     "schedule_free_adamw": _get_schedule_free_adamw,
+    "adamw_advanced": _get_adamw_advanced,
 }
 
 
@@ -184,7 +190,7 @@ def create_optimizer(
     if name in OPTIMIZERS:
         optimizer_cls = OPTIMIZERS[name]()
     elif "." in optimizer_type:
-        # Dynamic import — use original casing for the class name
+        # Dynamic import - use original casing for the class name
         optimizer_cls = _import_optimizer_class(optimizer_type)
     else:
         available = ", ".join(list_optimizers())
@@ -194,7 +200,7 @@ def create_optimizer(
             f"Or provide a dotted path like 'some.module.OptimizerClass'."
         )
 
-    # Build kwargs dict — most optimizers accept lr + weight_decay
+    # Build kwargs dict - most optimizers accept lr + weight_decay
     opt_kwargs: dict[str, Any] = {"lr": lr, **kwargs}
 
     # SGD doesn't accept weight_decay by default in all versions,

@@ -1,24 +1,35 @@
+# Wan T2V 14B - LoRA (24GB VRAM)
+# No quantization needed at 24GB
 model:
   architecture: wan
   dtype: bf16
   gradient_checkpointing: true
+  model_kwargs:
+    task: t2v-14B
 training:
   method: lora
   batch_size: 1
   gradient_accumulation_steps: 1
   mixed_precision: bf16
-  noise_offset: 0.0357
   timestep_sampling: sigmoid
   sigmoid_scale: 1.0
+  noise_offset: 0.0357
+  guidance_scale: 1.0
 optimizer:
-  optimizer_type: adamw
+  optimizer_type: adamw8bit
   learning_rate: 1.0e-4
-  weight_decay: 0.01
+  weight_decay: 1.0e-4
   scheduler_type: cosine
   warmup_steps: 100
 network:
   network_type: lora
   rank: 32
-  alpha: 16
+  alpha: 32
 saving:
   save_every_n_epochs: 1
+sampling:
+  guidance_scale: 5.0
+  num_inference_steps: 30
+  width: 832
+  height: 480
+  num_frames: 40

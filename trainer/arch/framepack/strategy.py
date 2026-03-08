@@ -71,14 +71,14 @@ class FramePackStrategy(ModelStrategy):
         """Load FramePack DiT model from checkpoint.
 
         Config fields used:
-            model.base_model_path       — path to packed DiT .safetensors
-            model.dtype                 — training dtype (bf16 default)
-            model.attn_mode             — attention backend (sdpa, flash, etc.)
-            model.split_attn            — per-sample split attention
-            model.quantization          — None, "fp8_scaled"
-            model.block_swap_count      — block swap CPU<->GPU count
-            model.gradient_checkpointing — enable gradient checkpointing
-            model.model_kwargs.guidance_scale — distilled guidance scale
+            model.base_model_path       - path to packed DiT .safetensors
+            model.dtype                 - training dtype (bf16 default)
+            model.attn_mode             - attention backend (sdpa, flash, etc.)
+            model.split_attn            - per-sample split attention
+            model.quantization          - None, "fp8_scaled"
+            model.block_swap_count      - block swap CPU<->GPU count
+            model.gradient_checkpointing - enable gradient checkpointing
+            model.model_kwargs.guidance_scale - distilled guidance scale
         """
         from trainer.arch.framepack.components.configs import FRAMEPACK_CONFIGS
         from trainer.arch.framepack.components.model import load_packed_model
@@ -128,7 +128,7 @@ class FramePackStrategy(ModelStrategy):
         dfs = cfg.training.discrete_flow_shift
         flow_shift = math.exp(dfs) if dfs != 0 else 1.0
 
-        # Cache all config values — no Pydantic access in hot path
+        # Cache all config values - no Pydantic access in hot path
         self._blocks_to_swap = blocks_to_swap
         self._device = device
         self._train_dtype = train_dtype
@@ -193,8 +193,8 @@ class FramePackStrategy(ModelStrategy):
         """Sample timesteps for FramePack flow matching training.
 
         Returns:
-            t: Float [B] in [min_t, max_t] — interpolation coefficient.
-            timesteps: Float [B] in [1, 1001] — model's expected timestep range.
+            t: Float [B] in [min_t, max_t] - interpolation coefficient.
+            timesteps: Float [B] in [1, 1001] - model's expected timestep range.
         """
         t = self._sample_t(
             bsz, device,
@@ -222,18 +222,18 @@ class FramePackStrategy(ModelStrategy):
         """Flow matching training step for FramePack.
 
         Expected batch keys:
-            latents                  — [B, 16, T, H, W] noisy target latents
-            latent_indices           — [B, T] temporal position indices
-            latents_clean            — [B, 16, T1, H, W] 1x clean context latents
-            clean_latent_indices     — [B, T1] indices for 1x latents
-            latents_clean_2x         — (optional) [B, 16, T2, H, W]
-            clean_latent_2x_indices  — (optional) [B, T2]
-            latents_clean_4x         — (optional) [B, 16, T4, H, W]
-            clean_latent_4x_indices  — (optional) [B, T4]
-            llama_vec                — [B, L, 4096] LLaMA text features
-            llama_attention_mask     — [B, L] text attention mask
-            clip_l_pooler            — [B, 768] CLIP-L pooled text embedding
-            image_embeddings         — [B, L_img, 1152] SigLIP image features
+            latents                  - [B, 16, T, H, W] noisy target latents
+            latent_indices           - [B, T] temporal position indices
+            latents_clean            - [B, 16, T1, H, W] 1x clean context latents
+            clean_latent_indices     - [B, T1] indices for 1x latents
+            latents_clean_2x         - (optional) [B, 16, T2, H, W]
+            clean_latent_2x_indices  - (optional) [B, T2]
+            latents_clean_4x         - (optional) [B, 16, T4, H, W]
+            clean_latent_4x_indices  - (optional) [B, T4]
+            llama_vec                - [B, L, 4096] LLaMA text features
+            llama_attention_mask     - [B, L] text attention mask
+            clip_l_pooler            - [B, 768] CLIP-L pooled text embedding
+            image_embeddings         - [B, L_img, 1152] SigLIP image features
 
         Flow matching loss:
             target = noise - latents
@@ -289,7 +289,7 @@ class FramePackStrategy(ModelStrategy):
         noisy_model_input = (1.0 - t_expanded) * latents + t_expanded * noise
 
         # --- Distilled guidance embedding ---
-        # FramePack uses embedded guidance (not CFG at inference) —
+        # FramePack uses embedded guidance (not CFG at inference) - 
         # guidance scale is fixed and embedded as a conditioning vector.
         guidance = torch.tensor(
             [self._guidance_scale * 1000.0] * bsz,

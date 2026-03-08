@@ -148,7 +148,7 @@ class QwenDoubleStreamAttention(nn.Module):
             attention_mask = attention_mask[:, None, None, :]  # [B, 1, 1, S]
 
         # Compute attention using SDPA
-        # joint_q/k/v: [B, S, H, D] — need [B, H, S, D] for SDPA
+        # joint_q/k/v: [B, S, H, D] - need [B, H, S, D] for SDPA
         joint_q = joint_q.transpose(1, 2)
         joint_k = joint_k.transpose(1, 2)
         joint_v = joint_v.transpose(1, 2)
@@ -337,9 +337,9 @@ class QwenImageTransformer2DModel(nn.Module):
         axes_dims_rope  = (16, 56, 56)
 
     Mode-specific flags:
-        zero_cond_t        — edit-2511 variant
-        use_additional_t_cond — layered mode (is_rgb embedding)
-        use_layer3d_rope   — layered mode (condition image gets neg frame index)
+        zero_cond_t        - edit-2511 variant
+        use_additional_t_cond - layered mode (is_rgb embedding)
+        use_layer3d_rope   - layered mode (condition image gets neg frame index)
 
     Forward signature:
         hidden_states: [B, L, in_channels]    packed latent sequence
@@ -495,7 +495,7 @@ class QwenImageTransformer2DModel(nn.Module):
         hidden_states = self.img_in(hidden_states)
         timestep = timestep.to(hidden_states.dtype)
 
-        # zero_cond_t: double timestep along batch — second half gets zero timestep
+        # zero_cond_t: double timestep along batch - second half gets zero timestep
         if self.zero_cond_t:
             if img_shapes is None:
                 raise ValueError("`img_shapes` must be provided when zero_cond_t=True.")

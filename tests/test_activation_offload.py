@@ -35,7 +35,7 @@ class TestContextManager:
 
         ctx = ActivationOffloadContext(enabled=False)
         with ctx:
-            # Internal state should remain None — no hook was registered.
+            # Internal state should remain None - no hook was registered.
             assert ctx._ctx is None
 
     def test_internal_state_reset_after_exit(self):
@@ -76,7 +76,7 @@ class TestCPUTensorPassThrough:
         x = torch.tensor([1.0, 2.0, 3.0], requires_grad=True)  # CPU
         with ctx:
             y = (x * 2).sum()
-        # Backward runs outside the context — activations are retrieved via unpack_hook.
+        # Backward runs outside the context - activations are retrieved via unpack_hook.
         y.backward()
 
         # If pass-through is correct, gradients are populated without error.

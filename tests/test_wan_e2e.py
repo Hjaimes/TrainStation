@@ -19,7 +19,7 @@ from trainer.arch.wan.strategy import WanStrategy
 
 
 # ---------------------------------------------------------------------------
-# Helpers — synthetic cache files
+# Helpers - synthetic cache files
 # ---------------------------------------------------------------------------
 
 def _create_cache_pair(

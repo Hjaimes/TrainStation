@@ -1,4 +1,4 @@
-"""Tests for trainer/callbacks_vram.py — VRAM profiling callback."""
+"""Tests for trainer/callbacks_vram.py - VRAM profiling callback."""
 from __future__ import annotations
 
 import pytest
@@ -41,7 +41,7 @@ class TestVRAMProfilerCallbackInstantiation:
 
 
 # ---------------------------------------------------------------------------
-# on_step_end — no CUDA
+# on_step_end - no CUDA
 # ---------------------------------------------------------------------------
 
 class TestOnStepEndNoCUDA:
@@ -68,7 +68,7 @@ class TestOnStepEndNoCUDA:
 
 
 # ---------------------------------------------------------------------------
-# on_step_end — with CUDA (mocked)
+# on_step_end - with CUDA (mocked)
 # ---------------------------------------------------------------------------
 
 class TestOnStepEndWithCUDA:

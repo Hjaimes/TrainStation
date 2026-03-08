@@ -1,4 +1,4 @@
-"""Tests for WanStrategy — timestep distributions, training step, hook behavior."""
+"""Tests for WanStrategy - timestep distributions, training step, hook behavior."""
 from __future__ import annotations
 
 import math
@@ -169,7 +169,7 @@ class TestApplyNoiseOffsetGeneralized:
         assert not torch.equal(noise, torch.zeros_like(noise))
 
     def test_generalized_zero_t_means_zero_offset(self):
-        """When t=0 for all samples, psi(t) = offset * sqrt(0) = 0 — no modification."""
+        """When t=0 for all samples, psi(t) = offset * sqrt(0) = 0 - no modification."""
         t = torch.zeros(2)
         noise = torch.zeros(2, 4, 8, 8)
         ModelStrategy._apply_noise_offset(noise, 1.0, t=t, offset_type="generalized")

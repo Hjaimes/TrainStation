@@ -1,4 +1,4 @@
-"""Tests for weight bouncing — per-layer CPU-pinned weight storage."""
+"""Tests for weight bouncing - per-layer CPU-pinned weight storage."""
 from __future__ import annotations
 
 import pytest
@@ -13,7 +13,7 @@ import torch.nn as nn
 _CUDA_AVAILABLE = torch.cuda.is_available()
 _skip_no_cuda = pytest.mark.skipif(not _CUDA_AVAILABLE, reason="CUDA not available")
 
-# Device used for "GPU" in CPU-only tests — just CPU, so transfers are no-ops
+# Device used for "GPU" in CPU-only tests - just CPU, so transfers are no-ops
 _CPU_DEVICE = torch.device("cpu")
 
 
@@ -23,7 +23,7 @@ def _make_linear(in_f: int = 8, out_f: int = 4, bias: bool = True) -> nn.Linear:
 
 
 # ---------------------------------------------------------------------------
-# BouncingLinear — basic properties
+# BouncingLinear - basic properties
 # ---------------------------------------------------------------------------
 
 class TestBouncingLinearProperties:
@@ -85,7 +85,7 @@ class TestBouncingLinearProperties:
 
 
 # ---------------------------------------------------------------------------
-# BouncingLinear — forward correctness
+# BouncingLinear - forward correctness
 # ---------------------------------------------------------------------------
 
 class TestBouncingLinearForward:
@@ -149,7 +149,7 @@ class TestBouncingLinearForward:
 
 
 # ---------------------------------------------------------------------------
-# BouncingLinear — backward / gradient correctness
+# BouncingLinear - backward / gradient correctness
 # ---------------------------------------------------------------------------
 
 class TestBouncingLinearBackward:

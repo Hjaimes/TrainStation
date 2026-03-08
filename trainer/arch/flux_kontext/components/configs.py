@@ -6,7 +6,7 @@ from the ``configs_flux_dev_context`` spec in Musubi_Tuner's flux_models.py.
 Key differences from Flux 2:
 - 64 in_channels (16-channel latents packed 2×2 = 64)
 - 3-axis position IDs (not 4-axis)
-- axes_dim sums to 128 (16+56+56) — head_dim = hidden_size // num_heads = 128
+- axes_dim sums to 128 (16+56+56) - head_dim = hidden_size // num_heads = 128
 - qkv_bias = True (original Flux uses biased QKV)
 - vec_in_dim = 768 (CLIP-L pooled embed, not Mistral3/Qwen3)
 - context_in_dim = 4096 (T5-XXL hidden dim)

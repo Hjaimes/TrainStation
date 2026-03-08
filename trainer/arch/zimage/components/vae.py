@@ -1,4 +1,4 @@
-"""Z-Image VAE — encode-side only for latent caching during training.
+"""Z-Image VAE - encode-side only for latent caching during training.
 
 The Z-Image VAE uses a non-standard normalization:
     model_latent = (vae_latent - shift) * scale
@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 
 
 # ---------------------------------------------------------------------------
-# Normalization helpers — applied AFTER encoding with the raw VAE
+# Normalization helpers - applied AFTER encoding with the raw VAE
 # ---------------------------------------------------------------------------
 
 def normalize_latents(latents: torch.Tensor) -> torch.Tensor:
@@ -84,7 +84,7 @@ def load_zimage_vae(
 
 
 # ---------------------------------------------------------------------------
-# Encode helper — used by latent caching pipeline
+# Encode helper - used by latent caching pipeline
 # ---------------------------------------------------------------------------
 
 def encode_pixels_to_latents(

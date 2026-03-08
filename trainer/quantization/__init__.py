@@ -1,11 +1,11 @@
 """Multi-type model quantization for VRAM reduction.
 
 Supported types:
-- "nf4"        — 4-bit NormalFloat via bitsandbytes (~75% VRAM reduction)
-- "int8"       — 8-bit integer via bitsandbytes (~50% reduction)
-- "fp8"        — 8-bit float, pure PyTorch (~50% reduction)
-- "fp8_scaled" — 8-bit float with per-tensor scaling (~50% reduction)
-- None         — no quantization
+- "nf4"        - 4-bit NormalFloat via bitsandbytes (~75% VRAM reduction)
+- "int8"       - 8-bit integer via bitsandbytes (~50% reduction)
+- "fp8"        - 8-bit float, pure PyTorch (~50% reduction)
+- "fp8_scaled" - 8-bit float with per-tensor scaling (~50% reduction)
+- None         - no quantization
 
 Usage in strategy setup():
     from trainer.quantization import quantize_model

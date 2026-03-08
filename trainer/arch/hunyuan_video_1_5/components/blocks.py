@@ -1,6 +1,6 @@
 """HunyuanVideo 1.5 transformer blocks.
 
-Only MMDoubleStreamBlock is included — HV 1.5 has NO single-stream blocks.
+Only MMDoubleStreamBlock is included - HV 1.5 has NO single-stream blocks.
 Self-contained: all imports from this package, not from hunyuan_video/.
 
 Porting improvements over Musubi_Tuner source:
@@ -197,7 +197,7 @@ class MMDoubleStreamBlock(nn.Module):
         hidden_size: Model dimension (2048 for HV 1.5).
         heads_num: Attention heads (16 for HV 1.5).
         mlp_width_ratio: MLP expansion factor (4.0).
-        mlp_act_type: Activation — must be "gelu_tanh".
+        mlp_act_type: Activation - must be "gelu_tanh".
         qk_norm: Must be True (RMS QK-norm is always on).
         qk_norm_type: Must be "rms".
         qkv_bias: Whether to use bias in QKV projections.

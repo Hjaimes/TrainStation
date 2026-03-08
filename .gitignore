@@ -47,5 +47,8 @@ jobs/
 # Internal docs / plans
 docs/
 
+# Wiki (managed manually)
+wiki/
+
 # Claude Code config
 .claude/

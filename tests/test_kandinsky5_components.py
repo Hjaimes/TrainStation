@@ -1,10 +1,10 @@
 """Kandinsky 5 component tests.
 
 Tests follow four tiers:
-    1. Config validation — TASK_CONFIGS structure and field values.
-    2. Registry — auto-discovery and strategy resolution.
-    3. Strategy properties — architecture name and supports_video.
-    4. Training step — synthetic forward pass producing a finite scalar loss.
+    1. Config validation - TASK_CONFIGS structure and field values.
+    2. Registry - auto-discovery and strategy resolution.
+    3. Strategy properties - architecture name and supports_video.
+    4. Training step - synthetic forward pass producing a finite scalar loss.
 """
 from __future__ import annotations
 
@@ -171,7 +171,7 @@ class TestNNModules:
     def test_time_embeddings_shape(self):
         from trainer.arch.kandinsky5.components.nn import TimeEmbeddings
         te = TimeEmbeddings(model_dim=64, time_dim=32)
-        # CPU only — skip autocast
+        # CPU only - skip autocast
         t = torch.rand(2)
         # autocast is CUDA-only; use float32 for CPU test
         with torch.no_grad():
@@ -215,7 +215,7 @@ class TestNNModules:
 
 
 # ---------------------------------------------------------------------------
-# 4. Training step tests — mock model for CPU-only execution
+# 4. Training step tests - mock model for CPU-only execution
 # ---------------------------------------------------------------------------
 
 class TinyMockKandinsky5(nn.Module):
@@ -277,9 +277,9 @@ def _make_batch(bsz: int = 1, n_frames: int = 4, h: int = 8, w: int = 8, channel
     return {
         # Standard layout: (B, C, F, H, W)
         "latents": torch.randn(bsz, channels, n_frames, h, w),
-        # text_embeds: (B, seq_len, dim) — Qwen embedding
+        # text_embeds: (B, seq_len, dim) - Qwen embedding
         "text_embeds": torch.randn(bsz, 32, 3584),
-        # pooled_embed: (B, dim) — CLIP pooled
+        # pooled_embed: (B, dim) - CLIP pooled
         "pooled_embed": torch.randn(bsz, 768),
     }
 
@@ -372,7 +372,7 @@ class TestTrainingStep:
         strategy._patch_size = (1, 2, 2)
         strategy._patch_volume = 4
         strategy._scale_factor = (1.0, 1.0, 1.0)
-        strategy._visual_cond = False  # image model — no visual conditioning
+        strategy._visual_cond = False  # image model - no visual conditioning
         strategy._attn_conf = type("Attn", (), {"type": "flash"})()
         strategy._nabla_mask_cache = {}
         strategy._noise_offset_val = 0.0
@@ -384,7 +384,7 @@ class TestTrainingStep:
         strategy._ts_logit_std = 1.0
         strategy._flow_shift = 1.0
 
-        # Image model: mock outputs (1, H, W, C) — no temporal dim
+        # Image model: mock outputs (1, H, W, C) - no temporal dim
         class ImageMockModel(nn.Module):
             def __init__(self):
                 super().__init__()

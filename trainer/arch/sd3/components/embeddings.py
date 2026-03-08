@@ -56,10 +56,10 @@ class Timesteps(nn.Module):
     def forward(self, timesteps: Tensor) -> Tensor:
         """
         Args:
-            timesteps: (B,) — scalar timesteps, typically in [0, 1000]
+            timesteps: (B,) - scalar timesteps, typically in [0, 1000]
 
         Returns:
-            (B, num_channels) — sinusoidal embeddings
+            (B, num_channels) - sinusoidal embeddings
         """
         half = self.num_channels // 2
         # Log-spaced frequencies: exp(-log(10000) * i / half) for i in [0, half)
@@ -104,11 +104,11 @@ class CombinedTimestepTextProjEmbeddings(nn.Module):
     def forward(self, timestep: Tensor, pooled_projection: Tensor) -> Tensor:
         """
         Args:
-            timestep:          (B,) — in [0, 1000]
-            pooled_projection: (B, pooled_projection_dim) — CLIP-L + CLIP-G pooled embeds
+            timestep:          (B,) - in [0, 1000]
+            pooled_projection: (B, pooled_projection_dim) - CLIP-L + CLIP-G pooled embeds
 
         Returns:
-            (B, embedding_dim) — combined conditioning vector
+            (B, embedding_dim) - combined conditioning vector
         """
         t_emb = self.timestep_embedder(self.time_proj(timestep))
         p_emb = self.text_embedder(pooled_projection)

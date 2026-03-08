@@ -1,4 +1,4 @@
-"""Preset system — builtin + user presets as partial YAML files."""
+"""Preset system - builtin + user presets as partial YAML files."""
 from __future__ import annotations
 
 import logging

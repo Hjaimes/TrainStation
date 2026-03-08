@@ -1,6 +1,6 @@
-# NetworkContainer — unified container for LoRA/LoHa/LoKr modules.
+# NetworkContainer - unified container for LoRA/LoHa/LoKr modules.
 # Ported and simplified from Musubi_Tuner's LoRANetwork class.
-# Does NOT do architecture detection — receives target_modules from arch_configs.
+# Does NOT do architecture detection - receives target_modules from arch_configs.
 
 import logging
 import os
@@ -443,7 +443,7 @@ class NetworkContainer(nn.Module):
         Returns:
             Tuple of (keys_scaled, average_norm, max_observed_norm).
         """
-        # Collect (down_weight, up_weight, alpha) directly from modules — no state_dict() copy
+        # Collect (down_weight, up_weight, alpha) directly from modules - no state_dict() copy
         triples: list[tuple[torch.Tensor, torch.Tensor, torch.Tensor]] = []
         for lora in self._lora_modules:
             down = getattr(lora, "lora_down", None)

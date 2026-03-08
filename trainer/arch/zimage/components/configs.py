@@ -56,7 +56,7 @@ DEFAULT_SCHEDULER_SHIFT: float = 3.0
 
 
 # ---------------------------------------------------------------------------
-# ZImageConfig dataclass — used by strategy.setup() to hold model metadata
+# ZImageConfig dataclass - used by strategy.setup() to hold model metadata
 # ---------------------------------------------------------------------------
 
 @dataclass(frozen=True)

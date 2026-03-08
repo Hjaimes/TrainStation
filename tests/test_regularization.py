@@ -48,7 +48,7 @@ def test_reg_data_iterator_cycles():
     # First pass
     assert reg_iter.next_batch() == {"id": 0}
     assert reg_iter.next_batch() == {"id": 1}
-    # Should cycle — next call should return first batch again
+    # Should cycle - next call should return first batch again
     assert reg_iter.next_batch() == {"id": 0}
     assert reg_iter.next_batch() == {"id": 1}
 

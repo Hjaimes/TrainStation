@@ -1,13 +1,13 @@
 """Tests for FramePack architecture components.
 
 Test levels (fast → slow):
-    1. Import checks — modules load without errors
-    2. Config validation — expected fields and values present
-    3. Registry — framepack discovered and resolves correctly
-    4. Strategy properties — architecture name, supports_video
-    5. Blocks — forward pass through individual layers with tiny tensors
-    6. Utils — temporal packing helpers produce correct shapes
-    7. Training step — mock model produces scalar finite loss
+    1. Import checks - modules load without errors
+    2. Config validation - expected fields and values present
+    3. Registry - framepack discovered and resolves correctly
+    4. Strategy properties - architecture name, supports_video
+    5. Blocks - forward pass through individual layers with tiny tensors
+    6. Utils - temporal packing helpers produce correct shapes
+    7. Training step - mock model produces scalar finite loss
 """
 from __future__ import annotations
 
@@ -426,7 +426,7 @@ class TestTrainingStep:
         components = ModelComponents(model=mock_model)
 
         B, C, T, H, W = 1, 16, 3, 8, 8
-        # Only include 1x clean latents — no 2x or 4x
+        # Only include 1x clean latents - no 2x or 4x
         batch = {
             "latents": torch.randn(B, C, T, H, W),
             "latent_indices": torch.arange(T).unsqueeze(0),

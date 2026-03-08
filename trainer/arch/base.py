@@ -161,7 +161,7 @@ class ModelStrategy:
     _loss_fn: Callable[[Tensor, Tensor], Tensor] | None = None
     _unreduced_loss_fn: Callable[[Tensor, Tensor], Tensor] | None = None
     _weight_fn: Callable[[Tensor], Tensor] | None = None
-    # Default noise offset type — overridden by setup() when cfg is available.
+    # Default noise offset type - overridden by setup() when cfg is available.
     _noise_offset_type: str = "simple"
 
     def _setup_loss_fn(self, cfg: TrainConfig) -> None:
@@ -393,7 +393,7 @@ class ModelStrategy:
         This encourages the model to learn overall brightness/color shifts.
 
         Args:
-            noise:       Noise tensor of shape (B, C, ...) — 4D or 5D.
+            noise:       Noise tensor of shape (B, C, ...) - 4D or 5D.
             offset:      Noise offset magnitude. If <= 0, this is a no-op.
             t:           Per-sample interpolation coefficient, shape (B,).
                          Required for ``offset_type="generalized"``, ignored otherwise.
@@ -409,7 +409,7 @@ class ModelStrategy:
             # psi(t) = offset * sqrt(t), one scale per batch sample
             # Broadcast t: (B,) -> (B, 1, 1, ...) to match noise dims
             effective_scale = offset * t.sqrt()
-            # effective_scale: (B,) — reshape to (B, 1, 1, ...) for broadcasting
+            # effective_scale: (B,) - reshape to (B, 1, 1, ...) for broadcasting
             scale_shape = (noise.shape[0],) + (1,) * (ndim - 1)
             effective_scale = effective_scale.view(scale_shape)
             channel_offset = torch.randn(*shape, device=noise.device, dtype=noise.dtype)

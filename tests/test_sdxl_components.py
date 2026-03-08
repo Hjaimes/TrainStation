@@ -1,6 +1,6 @@
 """Tests for SDXL architecture components.
 
-All tests run on CPU with tiny synthetic tensors — no real weights required.
+All tests run on CPU with tiny synthetic tensors - no real weights required.
 GPU is not needed. Mock UNet replaces diffusers for training step tests.
 """
 from __future__ import annotations
@@ -192,7 +192,7 @@ class TestRegistry:
         assert strategy.architecture == "sdxl"
 
     def test_supports_video_false(self):
-        """SDXL is image-only — supports_video must return False."""
+        """SDXL is image-only - supports_video must return False."""
         from trainer.registry import get_model_strategy
         from trainer.config.schema import TrainConfig, ModelConfig
         cls = get_model_strategy("sdxl")
@@ -228,7 +228,7 @@ class TinySDXLMock(nn.Module):
         added_cond_kwargs: dict | None = None,
         **kwargs,
     ):
-        # sample: (B, 4, H, W) — apply linear along channel dim and return
+        # sample: (B, 4, H, W) - apply linear along channel dim and return
         out = self.linear(sample.permute(0, 2, 3, 1)).permute(0, 3, 1, 2)
         return type("UNetOutput", (), {"sample": out})()
 
@@ -353,7 +353,7 @@ class TestTrainingStep:
         out_vp = strategy_vp.training_step(components_vp, batch, step=0)
 
         # Due to different targets, losses should differ
-        # (this is a soft check — if both happen to be identical, the targets are the same)
+        # (this is a soft check - if both happen to be identical, the targets are the same)
         # We simply verify both are valid
         assert torch.isfinite(out_eps.loss)
         assert torch.isfinite(out_vp.loss)

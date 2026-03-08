@@ -1,7 +1,7 @@
 """Primitive layer building blocks for HunyuanVideo 1.5.
 
 Includes: MLP, RMSNorm, modulate, apply_gate, _to_tuple.
-Self-contained — no imports from other arch packages.
+Self-contained - no imports from other arch packages.
 
 Porting improvements over Musubi_Tuner source:
 - print() removed, logging used instead
@@ -38,7 +38,7 @@ def _to_tuple(x: int | float | Sequence, dim: int = 2) -> tuple:
 class RMSNorm(nn.Module):
     """Root Mean Square Layer Normalization.
 
-    More efficient than LayerNorm — no mean computation.
+    More efficient than LayerNorm - no mean computation.
     Weight is cast to output dtype to allow fp8 linear layers to coexist.
     """
 
@@ -98,8 +98,8 @@ class MLP(nn.Module):
         out_features: Output dimension (defaults to in_channels).
         act_layer: Callable returning an activation module.
         norm_layer: Optional callable returning a normalization module.
-        bias: Bias flag(s) — bool or 2-tuple for each layer.
-        drop: Dropout rate(s) — float or 2-tuple for each layer.
+        bias: Bias flag(s) - bool or 2-tuple for each layer.
+        drop: Dropout rate(s) - float or 2-tuple for each layer.
     """
 
     def __init__(

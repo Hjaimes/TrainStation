@@ -354,7 +354,7 @@ class TestTrainingStep:
         strategy = _make_strategy()
         strategy._ts_method = "uniform"
 
-        # TinyMockHV15 returns zeros — so loss = MSE(0, noise-latents) = mean(target^2)
+        # TinyMockHV15 returns zeros - so loss = MSE(0, noise-latents) = mean(target^2)
         components = ModelComponents(model=TinyMockHV15())
         B, T, H, W = 1, 2, 4, 4
         batch = _make_batch(B=B, T=T, H=H, W=W)

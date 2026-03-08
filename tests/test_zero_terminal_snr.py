@@ -22,7 +22,7 @@ def _sdxl_alphas_cumprod(T: int = 1000) -> torch.Tensor:
     """SDXL scaled-linear beta schedule (matches diffusers / compute_alphas_cumprod).
 
     beta_start=0.00085, beta_end=0.012, quadratic spacing.
-    Terminal value: alpha_bar[-1] ≈ 0.0047 — clearly non-zero, so the
+    Terminal value: alpha_bar[-1] ≈ 0.0047 - clearly non-zero, so the
     rescaling has a measurable effect and the post-rescaled[0] ≈ original[0].
     """
     beta_start = 0.00085
@@ -115,7 +115,7 @@ class TestRescaleZeroTerminalSnr:
         assert abs(ratio_orig - ratio_rescaled) < 0.05
 
     def test_idempotent_safe(self):
-        """Applying rescaling twice is safe — the final entry remains 0."""
+        """Applying rescaling twice is safe - the final entry remains 0."""
         alphas = _sdxl_alphas_cumprod()
         once = ModelStrategy._rescale_zero_terminal_snr(alphas)
         twice = ModelStrategy._rescale_zero_terminal_snr(once)
@@ -154,7 +154,7 @@ class TestRescaleZeroTerminalSnr:
 
 
 # ---------------------------------------------------------------------------
-# TrainingConfig schema — zero_terminal_snr field
+# TrainingConfig schema - zero_terminal_snr field
 # ---------------------------------------------------------------------------
 
 def _make_config(**training_kwargs) -> TrainConfig:

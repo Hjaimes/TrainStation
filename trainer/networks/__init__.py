@@ -1,4 +1,4 @@
-# trainer.networks — LoRA/LoHa/LoKr/DoRA network modules and container.
+# trainer.networks - LoRA/LoHa/LoKr/DoRA network modules and container.
 
 from typing import Type
 

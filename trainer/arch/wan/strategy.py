@@ -53,14 +53,14 @@ class WanStrategy(ModelStrategy):
         """Load WanModel from checkpoint, detect dtype, return ModelComponents.
 
         Config fields used:
-            model.base_model_path   — path to transformer .safetensors
-            model.dtype             — training dtype (bf16, fp16, fp32)
-            model.attn_mode         — attention backend (sdpa, flash, xformers, etc.)
-            model.split_attn        — whether to use split attention
-            model.quantization      — None, "fp8", "fp8_scaled"
-            model.block_swap_count  — number of blocks to swap CPU↔GPU
-            model.gradient_checkpointing — enable gradient checkpointing
-            model.model_kwargs      — extra kwargs, e.g. {"task": "t2v-14B"}
+            model.base_model_path   - path to transformer .safetensors
+            model.dtype             - training dtype (bf16, fp16, fp32)
+            model.attn_mode         - attention backend (sdpa, flash, xformers, etc.)
+            model.split_attn        - whether to use split attention
+            model.quantization      - None, "fp8", "fp8_scaled"
+            model.block_swap_count  - number of blocks to swap CPU↔GPU
+            model.gradient_checkpointing - enable gradient checkpointing
+            model.model_kwargs      - extra kwargs, e.g. {"task": "t2v-14B"}
         """
         from trainer.arch.wan.components.configs import WAN_CONFIGS
         from trainer.arch.wan.components.model import (
@@ -133,7 +133,7 @@ class WanStrategy(ModelStrategy):
         dfs = cfg.training.discrete_flow_shift
         flow_shift = math.exp(dfs) if dfs != 0 else 1.0
 
-        # Store strategy state — accessed every training step, so cache everything
+        # Store strategy state - accessed every training step, so cache everything
         self._blocks_to_swap = blocks_to_swap
         self._device = device
         self._train_dtype = train_dtype
@@ -203,8 +203,8 @@ class WanStrategy(ModelStrategy):
         """Sample timesteps for Wan flow matching training.
 
         Returns:
-            t: Float [B] in [min_t, max_t] — interpolation coefficient.
-            timesteps: Float [B] in [1, 1001] — Wan model's expected range.
+            t: Float [B] in [min_t, max_t] - interpolation coefficient.
+            timesteps: Float [B] in [1, 1001] - Wan model's expected range.
         """
         t = self._sample_t(
             bsz, device,
@@ -279,7 +279,7 @@ class WanStrategy(ModelStrategy):
             seq_len=seq_len,
         )
 
-        # Model returns List[Tensor] — stack into [B, C, F, H, W]
+        # Model returns List[Tensor] - stack into [B, C, F, H, W]
         model_pred = torch.stack(model_pred, dim=0)
 
         # --- Loss ---

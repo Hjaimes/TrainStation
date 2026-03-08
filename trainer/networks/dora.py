@@ -11,7 +11,7 @@
 # Column-wise norm is detached per paper sec 4.3 to prevent gradient
 # interference between magnitude and directional learning.
 #
-# Only supports Linear layers — Conv2d is not compatible with this
+# Only supports Linear layers - Conv2d is not compatible with this
 # decomposition without further modification.
 
 import math
@@ -78,7 +78,7 @@ class DoRAModule(nn.Module):
         nn.init.kaiming_uniform_(self.lora_down.weight, a=math.sqrt(5))
         nn.init.zeros_(self.lora_up.weight)
 
-        # Alpha / scale — same convention as LoRA
+        # Alpha / scale - same convention as LoRA
         if type(alpha) == torch.Tensor:
             alpha = alpha.detach().float().numpy()  # bf16 safety
         alpha = lora_dim if alpha is None or alpha == 0 else alpha
@@ -90,7 +90,7 @@ class DoRAModule(nn.Module):
         weight_f32 = org_module.weight.detach().float()
         self.magnitude = nn.Parameter(weight_f32.norm(dim=1))  # shape: (out_dim,)
 
-        # Store references to original weight and bias — NOT as registered parameters.
+        # Store references to original weight and bias - NOT as registered parameters.
         # Using a plain attribute list prevents nn.Module from registering them, which
         # would double-count parameters and create ownership conflicts.
         self._org_weight_ref = [org_module.weight]
@@ -132,7 +132,7 @@ class DoRAModule(nn.Module):
     # ------------------------------------------------------------------
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        # Module dropout — skip DoRA entirely, return original output
+        # Module dropout - skip DoRA entirely, return original output
         if self.module_dropout is not None and self.training:
             if torch.rand(1).item() < self.module_dropout:
                 return self.org_forward(x)

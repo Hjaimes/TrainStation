@@ -58,5 +58,5 @@ class ConfigBinder:
             if isinstance(value, dict):
                 self._flatten(value, full_key)
             else:
-                # Lists, scalars, None — all are leaf values, never recursed
+                # Lists, scalars, None - all are leaf values, never recursed
                 self._values[full_key] = value

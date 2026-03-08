@@ -33,7 +33,7 @@ class Flux2VariantConfig:
     # Guidance
     use_guidance_embed: bool              # True for dev (guidance-distilled)
 
-    # Text encoder selector — None = Mistral3, "4B" / "8B" = Qwen3 variant
+    # Text encoder selector - None = Mistral3, "4B" / "8B" = Qwen3 variant
     qwen_variant: str | None              # None for Mistral3, "4B" or "8B" for Qwen3
 
 

@@ -1,0 +1,33 @@
+# SD3.5 Large - LoRA (24GB VRAM)
+model:
+  architecture: sd3
+  dtype: bf16
+  quantization: fp8
+  gradient_checkpointing: true
+  model_kwargs:
+    task: sd3.5-large
+training:
+  method: lora
+  batch_size: 1
+  gradient_accumulation_steps: 1
+  mixed_precision: bf16
+  ema_enabled: true
+  ema_decay: 0.99
+optimizer:
+  optimizer_type: adamw8bit
+  learning_rate: 1.0e-4
+  scheduler_type: cosine
+  warmup_steps: 100
+network:
+  network_type: lora
+  rank: 16
+  alpha: 16
+saving:
+  save_every_n_epochs: 1
+data:
+  resolution: 1024
+sampling:
+  guidance_scale: 4.0
+  num_inference_steps: 25
+  width: 1024
+  height: 1024

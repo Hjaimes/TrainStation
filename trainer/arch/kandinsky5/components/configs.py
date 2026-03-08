@@ -1,6 +1,6 @@
 """Kandinsky 5 task-based configuration dataclasses.
 
-Ported from Musubi_Tuner's kandinsky5/configs.py. Inline configs — no
+Ported from Musubi_Tuner's kandinsky5/configs.py. Inline configs - no
 external YAML required. TASK_CONFIGS keys match the ``task`` model kwarg.
 """
 from __future__ import annotations

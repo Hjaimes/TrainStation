@@ -112,20 +112,20 @@ class QwenImageStrategy(ModelStrategy):
     """Strategy for the QwenImage text-to-image / editing / layered architecture.
 
     Three modes:
-        t2i     — text-to-image (default)
-        edit    — image editing with one or more control images
-        edit-2511 — edit with zero_cond_t enabled (newer variant)
-        layered — multi-layer generation with 3D RoPE and additional t-cond
+        t2i     - text-to-image (default)
+        edit    - image editing with one or more control images
+        edit-2511 - edit with zero_cond_t enabled (newer variant)
+        layered - multi-layer generation with 3D RoPE and additional t-cond
 
     Config keys used:
-        model.base_model_path   — path to DiT safetensors
-        model.dtype             — training dtype (bf16, fp16, fp32)
-        model.attn_mode         — attention backend
-        model.split_attn        — split attention for memory efficiency
-        model.quantization      — None or "fp8_scaled"
-        model.block_swap_count  — blocks to swap CPU↔GPU
+        model.base_model_path   - path to DiT safetensors
+        model.dtype             - training dtype (bf16, fp16, fp32)
+        model.attn_mode         - attention backend
+        model.split_attn        - split attention for memory efficiency
+        model.quantization      - None or "fp8_scaled"
+        model.block_swap_count  - blocks to swap CPU↔GPU
         model.gradient_checkpointing
-        model.model_kwargs      — {"mode": "t2i"|"edit"|"edit-2511"|"layered",
+        model.model_kwargs      - {"mode": "t2i"|"edit"|"edit-2511"|"layered",
                                    "num_layers": 60}
     """
 
@@ -285,8 +285,8 @@ class QwenImageStrategy(ModelStrategy):
         """Sample timesteps for QwenImage flow-matching training.
 
         Returns:
-            t:         Float [B] in [min_t, max_t] — interpolation coefficient.
-            timesteps: Float [B] scaled to [1, 1001] — passed to the model.
+            t:         Float [B] in [min_t, max_t] - interpolation coefficient.
+            timesteps: Float [B] scaled to [1, 1001] - passed to the model.
         """
         t = self._sample_t(
             bsz, device,
@@ -315,7 +315,7 @@ class QwenImageStrategy(ModelStrategy):
 
         Batch expected keys:
             latents:    [B, C, 1, H, W] (t2i) or [B, C, L, H, W] (layered)
-            vl_embed:   list of [S, D] tensors — one per sample (variable length)
+            vl_embed:   list of [S, D] tensors - one per sample (variable length)
 
         Optional batch keys:
             latents_control_0 ... latents_control_N: edit control images

@@ -48,18 +48,18 @@ class SD3Strategy(ModelStrategy):
         """Load SD3 model from checkpoint and cache hot-path constants.
 
         Config fields used:
-            model.base_model_path     — path to transformer .safetensors
-            model.dtype               — training dtype (bf16, fp16, fp32)
-            model.gradient_checkpointing — enable gradient checkpointing
-            model.model_kwargs        — {"model_version": "sd3-medium"} etc.
-            training.noise_offset     — additive noise offset
-            training.discrete_flow_shift — flow shift exponent (0 = no shift)
-            training.timestep_sampling — uniform, sigmoid, logit_normal, shift
-            training.min_timestep     — lower bound for t in [0, 1]
-            training.max_timestep     — upper bound for t in [0, 1]
-            training.sigmoid_scale    — scale for sigmoid/shift method
-            training.logit_mean       — mean for logit_normal method
-            training.logit_std        — std for logit_normal method
+            model.base_model_path     - path to transformer .safetensors
+            model.dtype               - training dtype (bf16, fp16, fp32)
+            model.gradient_checkpointing - enable gradient checkpointing
+            model.model_kwargs        - {"model_version": "sd3-medium"} etc.
+            training.noise_offset     - additive noise offset
+            training.discrete_flow_shift - flow shift exponent (0 = no shift)
+            training.timestep_sampling - uniform, sigmoid, logit_normal, shift
+            training.min_timestep     - lower bound for t in [0, 1]
+            training.max_timestep     - upper bound for t in [0, 1]
+            training.sigmoid_scale    - scale for sigmoid/shift method
+            training.logit_mean       - mean for logit_normal method
+            training.logit_std        - std for logit_normal method
         """
         from trainer.arch.sd3.components.configs import SD3_CONFIGS
         from trainer.arch.sd3.components.model import load_sd3_model
@@ -89,7 +89,7 @@ class SD3Strategy(ModelStrategy):
         if cfg.model.gradient_checkpointing:
             model.enable_gradient_checkpointing()
 
-        # Cache hot-path constants — avoid Pydantic attribute access in training loop
+        # Cache hot-path constants - avoid Pydantic attribute access in training loop
         self._device = device
         self._train_dtype = train_dtype
         self._sd3_config = sd3_config
@@ -121,8 +121,8 @@ class SD3Strategy(ModelStrategy):
         """Sample timesteps for SD3 flow-matching training.
 
         Returns:
-            t:         Float [B] in [min_t, max_t] — interpolation coefficient.
-            timesteps: Float [B] in [0, 1000] — SD3 model-facing timestep.
+            t:         Float [B] in [min_t, max_t] - interpolation coefficient.
+            timesteps: Float [B] in [0, 1000] - SD3 model-facing timestep.
         """
         t = self._sample_t(
             bsz, device,
@@ -147,9 +147,9 @@ class SD3Strategy(ModelStrategy):
         """Flow-matching training step for SD3.
 
         Batch format:
-            latents:    (B, 16, H/8, W/8) — 16-channel latents
-            ctx_vec:    (B, L, 4096)      — T5-XXL text embeddings
-            pooled_vec: (B, 2048)         — concatenated CLIP-L + CLIP-G pooled (optional)
+            latents:    (B, 16, H/8, W/8) - 16-channel latents
+            ctx_vec:    (B, L, 4096)      - T5-XXL text embeddings
+            pooled_vec: (B, 2048)         - concatenated CLIP-L + CLIP-G pooled (optional)
 
         Pipeline:
         1. Sample noise and timesteps t in [0, 1].

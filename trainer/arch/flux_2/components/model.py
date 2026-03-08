@@ -35,7 +35,7 @@ FP8_OPTIMIZATION_EXCLUDE_KEYS = ["norm", "pe_embedder", "time_in", "_modulation"
 
 
 # ---------------------------------------------------------------------------
-# RoPE helpers (unchanged from Musubi_Tuner — math is correct)
+# RoPE helpers (unchanged from Musubi_Tuner - math is correct)
 # ---------------------------------------------------------------------------
 
 def _rope(pos: Tensor, dim: int, theta: int) -> Tensor:
@@ -216,7 +216,7 @@ class _LastLayer(nn.Module):
 
 
 class _SelfAttention(nn.Module):
-    """QKV self-attention sub-block (no output projection here — done in block)."""
+    """QKV self-attention sub-block (no output projection here - done in block)."""
 
     def __init__(self, dim: int, num_heads: int):
         super().__init__()
@@ -416,7 +416,7 @@ class SingleStreamBlock(nn.Module):
 
 
 # ---------------------------------------------------------------------------
-# Flux2Model — main transformer
+# Flux2Model - main transformer
 # ---------------------------------------------------------------------------
 
 class Flux2Model(nn.Module):
@@ -571,7 +571,7 @@ class Flux2Model(nn.Module):
             supports_backward, device, use_pinned_memory,
         )
         logger.info(
-            "Flux2: block swap enabled — total=%d, double=%d, single=%d",
+            "Flux2: block swap enabled - total=%d, double=%d, single=%d",
             num_blocks, double_to_swap, single_to_swap,
         )
 
@@ -610,15 +610,15 @@ class Flux2Model(nn.Module):
         """Forward pass.
 
         Args:
-            x:         ``(B, HW, C)`` — packed image tokens (128 channels).
-            x_ids:     ``(B, HW, 4)`` — image position IDs.
-            timesteps: ``(B,)`` — float timesteps in [0, 1].
-            ctx:       ``(B, L, D)`` — text embeddings.
-            ctx_ids:   ``(B, L, 4)`` — text position IDs.
-            guidance:  ``(B,)`` — guidance scale vector, or ``None`` if unused.
+            x:         ``(B, HW, C)`` - packed image tokens (128 channels).
+            x_ids:     ``(B, HW, 4)`` - image position IDs.
+            timesteps: ``(B,)`` - float timesteps in [0, 1].
+            ctx:       ``(B, L, D)`` - text embeddings.
+            ctx_ids:   ``(B, L, 4)`` - text position IDs.
+            guidance:  ``(B,)`` - guidance scale vector, or ``None`` if unused.
 
         Returns:
-            ``(B, HW, C)`` — predicted velocity field (packed).
+            ``(B, HW, C)`` - predicted velocity field (packed).
         """
         num_txt_tokens = ctx.shape[1]
 

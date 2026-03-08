@@ -6,7 +6,7 @@ import torch
 import torch.nn as nn
 
 # ---------------------------------------------------------------------------
-# Module-level helper — must be defined BEFORE any test class that uses it
+# Module-level helper - must be defined BEFORE any test class that uses it
 # ---------------------------------------------------------------------------
 
 def _bnb_available() -> bool:
@@ -205,7 +205,7 @@ class TestFP8Quantization:
 # ---------------------------------------------------------------------------
 
 class TestQuantizeModel:
-    """Tests for quantize_model() — graph walking and stats."""
+    """Tests for quantize_model() - graph walking and stats."""
 
     def _make_model_with_norms(self):
         """Model with linears, a LayerNorm, and an Embedding."""
@@ -322,7 +322,7 @@ class TestQuantizeModel:
 # ---------------------------------------------------------------------------
 
 class TestNF4:
-    """Tests for NF4 quantization — conditionally requires bitsandbytes."""
+    """Tests for NF4 quantization - conditionally requires bitsandbytes."""
 
     def test_is_bnb_available_returns_bool(self):
         from trainer.quantization.bnb import is_bnb_available
@@ -353,7 +353,7 @@ class TestNF4:
         assert stats["quantized"] == 1
         assert isinstance(model[0], LinearNf4)
 
-    @pytest.mark.skipif(_bnb_available(), reason="bitsandbytes IS installed — testing stub path")
+    @pytest.mark.skipif(_bnb_available(), reason="bitsandbytes IS installed - testing stub path")
     def test_nf4_raises_import_error_without_bnb(self):
         """When bnb is absent, calling the nf4 factory raises ImportError."""
         from trainer.quantization import get_quantizer, _QUANTIZERS, _register_quantizers

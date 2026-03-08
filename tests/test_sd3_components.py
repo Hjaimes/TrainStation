@@ -1,6 +1,6 @@
 """Tests for SD3 architecture components.
 
-All tests run on CPU with tiny synthetic tensors — no real weights required.
+All tests run on CPU with tiny synthetic tensors - no real weights required.
 Follows the pattern of tests/test_flux2_components.py.
 """
 from __future__ import annotations
@@ -485,7 +485,7 @@ class TestStrategy:
 
         class CapturingModel(nn.Module):
             def forward(self, hidden_states, encoder_hidden_states, timestep, pooled_projections):
-                # Return a zero tensor — we're only checking the loss target
+                # Return a zero tensor - we're only checking the loss target
                 return torch.zeros_like(hidden_states)
 
         components.model = CapturingModel()

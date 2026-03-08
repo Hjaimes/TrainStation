@@ -1,6 +1,6 @@
 # Consolidated utility module for WanModel dependencies.
 #
-# Sources (extracted and adapted — originals are read-only reference):
+# Sources (extracted and adapted - originals are read-only reference):
 #   - musubi_tuner/utils/device_utils.py
 #   - musubi_tuner/modules/custom_offloading_utils.py
 #   - musubi_tuner/utils/safetensors_utils.py
@@ -35,7 +35,7 @@ from tqdm import tqdm
 logger = logging.getLogger(__name__)
 
 # ===========================================================================
-# Section 1 — device_utils
+# Section 1 - device_utils
 # Source: musubi_tuner/utils/device_utils.py
 # ===========================================================================
 
@@ -69,7 +69,7 @@ def synchronize_device(device: Optional[Union[str, torch.device]]):
 
 
 # ===========================================================================
-# Section 2 — custom_offloading_utils  (ModelOffloader + Offloader)
+# Section 2 - custom_offloading_utils  (ModelOffloader + Offloader)
 # Source: musubi_tuner/modules/custom_offloading_utils.py
 # ===========================================================================
 
@@ -498,7 +498,7 @@ class ModelOffloader(Offloader):
 
 
 # ===========================================================================
-# Section 3 — safetensors_utils  (MemoryEfficientSafeOpen + helpers)
+# Section 3 - safetensors_utils  (MemoryEfficientSafeOpen + helpers)
 # Source: musubi_tuner/utils/safetensors_utils.py
 # ===========================================================================
 
@@ -727,7 +727,7 @@ class TensorWeightAdapter:
             return self.original_f.get_tensor(new_key, device=device, dtype=dtype)
 
         elif new_key not in self.concat_key_set:
-            # split hook — cached because the original tensor is split once
+            # split hook - cached because the original tensor is split once
             original_key = self.new_key_to_original_key_map[new_key]
             if original_key not in self.tensor_cache:
                 original_tensor = self.original_f.get_tensor(original_key, device=device, dtype=dtype)
@@ -737,7 +737,7 @@ class TensorWeightAdapter:
             return self.tensor_cache.pop(new_key)
 
         else:
-            # concat hook — not cached; requested once
+            # concat hook - not cached; requested once
             tensors = {}
             for original_key in self.new_key_to_original_key_map[new_key]:
                 tensor = self.original_f.get_tensor(original_key, device=device, dtype=dtype)
@@ -771,7 +771,7 @@ def get_split_weight_filenames(file_path: str) -> Optional[list[str]]:
 
 
 # ===========================================================================
-# Section 4 — fp8_optimization_utils
+# Section 4 - fp8_optimization_utils
 # Source: musubi_tuner/modules/fp8_optimization_utils.py
 # ===========================================================================
 
@@ -1182,7 +1182,7 @@ def load_safetensors_with_fp8_optimization(
 
 
 # ===========================================================================
-# Section 5 — lora_utils  (load_safetensors_with_lora_and_fp8 + helpers)
+# Section 5 - lora_utils  (load_safetensors_with_lora_and_fp8 + helpers)
 # Source: musubi_tuner/utils/lora_utils.py
 #
 # The dynamic imports of musubi_tuner.networks.loha / lokr are replaced by
@@ -1193,7 +1193,7 @@ def load_safetensors_with_fp8_optimization(
 
 # ---------------------------------------------------------------------------
 # Inlined LoHa merge helper
-# Source: musubi_tuner/networks/loha.py — merge_weights_to_tensor()
+# Source: musubi_tuner/networks/loha.py - merge_weights_to_tensor()
 # ---------------------------------------------------------------------------
 
 def _loha_merge_weights_to_tensor(
@@ -1254,7 +1254,7 @@ def _loha_merge_weights_to_tensor(
 
 # ---------------------------------------------------------------------------
 # Inlined LoKr helpers
-# Source: musubi_tuner/networks/lokr.py — make_kron() + merge_weights_to_tensor()
+# Source: musubi_tuner/networks/lokr.py - make_kron() + merge_weights_to_tensor()
 # ---------------------------------------------------------------------------
 
 def _make_kron(w1, w2, scale):
@@ -1634,7 +1634,7 @@ def load_safetensors_with_lora_and_fp8(
 
 
 # ---------------------------------------------------------------------------
-# load_safetensors — simple state_dict loader (used by clip.py)
+# load_safetensors - simple state_dict loader (used by clip.py)
 # Source: musubi_tuner/utils/safetensors_utils.py
 # ---------------------------------------------------------------------------
 

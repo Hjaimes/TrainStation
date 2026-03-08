@@ -1,6 +1,6 @@
 """Tests for Flux 1 architecture components.
 
-All tests run on CPU with tiny synthetic tensors — no real weights required.
+All tests run on CPU with tiny synthetic tensors - no real weights required.
 Follows the pattern of tests/test_flux2_components.py.
 """
 from __future__ import annotations
@@ -24,7 +24,7 @@ class TestConfigs:
         assert "schnell" in FLUX1_CONFIGS
 
     def test_config_frozen(self):
-        """Flux1Config is a frozen dataclass — must raise on mutation."""
+        """Flux1Config is a frozen dataclass - must raise on mutation."""
         from trainer.arch.flux_1.components.configs import FLUX1_CONFIGS
         cfg = FLUX1_CONFIGS["dev"]
         with pytest.raises((AttributeError, TypeError)):
@@ -277,7 +277,7 @@ class TestBlocks:
         torch.manual_seed(42)
         x = torch.randn(1, 4, 8)
         out = act(x)
-        # If it were SiLU: silu(x1) * x2 — verify it uses gelu gate
+        # If it were SiLU: silu(x1) * x2 - verify it uses gelu gate
         x1, x2 = x.chunk(2, dim=-1)
         expected_geglu = x1 * torch.nn.functional.gelu(x2)
         assert torch.allclose(out, expected_geglu, atol=1e-5), "Must use gelu gate (GEGLU)"
@@ -316,7 +316,7 @@ def _make_tiny_config():
         in_channels=16,    # smaller for test
         context_dim=32,
         pooled_dim=16,
-        rope_axes=(4, 4, 4),   # sums to 12 but head_dim=32 — need to match
+        rope_axes=(4, 4, 4),   # sums to 12 but head_dim=32 - need to match
         use_guidance_embed=True,
         activation="geglu",
     )

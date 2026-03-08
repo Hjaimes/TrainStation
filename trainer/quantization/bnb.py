@@ -1,4 +1,4 @@
-"""NF4 and INT8 quantization via bitsandbytes. Deferred import — bitsandbytes is optional."""
+"""NF4 and INT8 quantization via bitsandbytes. Deferred import - bitsandbytes is optional."""
 from __future__ import annotations
 
 import logging

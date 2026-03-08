@@ -2,7 +2,7 @@
 
 Flux 1 uses:
 - 16-channel latents packed 2x2 to 64-channel tokens
-- 3D RoPE (16, 56, 56) — image-only, no temporal dimension
+- 3D RoPE (16, 56, 56) - image-only, no temporal dimension
 - T5-XXL text encoder + CLIP-L pooled conditioning
 - Per-block AdaLayerNorm modulation
 - GEGLU activation
@@ -54,14 +54,14 @@ class Flux1Strategy(ModelStrategy):
         """Load Flux1Transformer from checkpoint, detect dtype, return ModelComponents.
 
         Config fields used:
-            model.base_model_path        — path to DiT .safetensors
-            model.dtype                  — training dtype (bf16, fp16, fp32)
-            model.attn_mode              — attention backend
-            model.split_attn             — whether to use split attention
-            model.quantization           — None, "fp8_scaled"
-            model.block_swap_count       — number of blocks to swap CPU<->GPU
-            model.gradient_checkpointing — enable gradient checkpointing
-            model.model_kwargs           — extra kwargs, e.g. {"model_version": "dev"}
+            model.base_model_path        - path to DiT .safetensors
+            model.dtype                  - training dtype (bf16, fp16, fp32)
+            model.attn_mode              - attention backend
+            model.split_attn             - whether to use split attention
+            model.quantization           - None, "fp8_scaled"
+            model.block_swap_count       - number of blocks to swap CPU<->GPU
+            model.gradient_checkpointing - enable gradient checkpointing
+            model.model_kwargs           - extra kwargs, e.g. {"model_version": "dev"}
         """
         from trainer.arch.flux_1.components.configs import FLUX1_CONFIGS
         from trainer.arch.flux_1.components.model import detect_flux1_weight_dtype, load_flux1_model
@@ -185,8 +185,8 @@ class Flux1Strategy(ModelStrategy):
         """Sample timesteps for Flux 1 flow-matching training.
 
         Returns:
-            t:         Float [B] in [min_t, max_t] — interpolation coefficient.
-            timesteps: Float [B] in [0, 1] — Flux 1 model receives timesteps in [0, 1].
+            t:         Float [B] in [min_t, max_t] - interpolation coefficient.
+            timesteps: Float [B] in [0, 1] - Flux 1 model receives timesteps in [0, 1].
         """
         t = self._sample_t(
             bsz, device,
@@ -214,9 +214,9 @@ class Flux1Strategy(ModelStrategy):
         """Flow-matching training step for Flux 1.
 
         Batch format:
-            latents:  (B, 16, H, W) — 16-channel raw latents.
-            ctx_vec:  (B, L, 4096)  — T5-XXL text embeddings.
-            pooled:   (B, 768)      — CLIP-L pooled text embedding (optional).
+            latents:  (B, 16, H, W) - 16-channel raw latents.
+            ctx_vec:  (B, L, 4096)  - T5-XXL text embeddings.
+            pooled:   (B, 768)      - CLIP-L pooled text embedding (optional).
 
         Pipeline:
         1. Pack spatial dims: (B, 16, H, W) -> (B, HW/4, 64) + 3D position IDs.
@@ -238,7 +238,7 @@ class Flux1Strategy(ModelStrategy):
 
         # Extract batch
         latents = batch["latents"].to(device=device, dtype=train_dtype)
-        # Latents are (B, 16, H, W) — raw 16-channel
+        # Latents are (B, 16, H, W) - raw 16-channel
         packed_latent_h = latents.shape[2] // 2  # packed spatial height (H/2)
         packed_latent_w = latents.shape[3] // 2  # packed spatial width  (W/2)
 
@@ -281,7 +281,7 @@ class Flux1Strategy(ModelStrategy):
             noisy_packed = noisy_packed.requires_grad_(True)
             ctx_vec = ctx_vec.requires_grad_(True)
 
-        # Forward pass — Flux1Transformer returns (B, HW, 64)
+        # Forward pass - Flux1Transformer returns (B, HW, 64)
         model_pred = components.model(
             x=noisy_packed,
             x_ids=img_ids,

@@ -1,6 +1,6 @@
 """Pure text utilities for caption processing: tag shuffling and token dropout.
 
-These functions are stateless and operate only on strings — no model or tensor
+These functions are stateless and operate only on strings - no model or tensor
 dependencies. They can be called safely from a DataLoader worker process.
 """
 from __future__ import annotations

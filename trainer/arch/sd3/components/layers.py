@@ -31,12 +31,12 @@ class AdaLayerNormZero(nn.Module):
     ) -> tuple[Tensor, Tensor, Tensor, Tensor, Tensor]:
         """
         Args:
-            x:   (B, L, D) — input sequence
-            emb: (B, D)    — conditioning (timestep + pooled text)
+            x:   (B, L, D) - input sequence
+            emb: (B, D)    - conditioning (timestep + pooled text)
 
         Returns:
-            x_normed:  (B, L, D) — norm(x) * (1 + scale_msa) + shift_msa
-            gate_msa:  (B, 1, D) — gating for attention output
+            x_normed:  (B, L, D) - norm(x) * (1 + scale_msa) + shift_msa
+            gate_msa:  (B, 1, D) - gating for attention output
             shift_mlp: (B, 1, D)
             scale_mlp: (B, 1, D)
             gate_mlp:  (B, 1, D)
@@ -72,7 +72,7 @@ class AdaLayerNormZeroSingle(nn.Module):
             emb: (B, D)
 
         Returns:
-            x_normed:  (B, L, D) — norm(x) * (1 + scale_msa) + shift_msa
+            x_normed:  (B, L, D) - norm(x) * (1 + scale_msa) + shift_msa
             gate_msa:  (B, 1, D)
             shift_mlp: (B, 1, D)
             scale_mlp: (B, 1, D)
@@ -104,7 +104,7 @@ class AdaLayerNormContinuous(nn.Module):
             conditioning: (B, D)
 
         Returns:
-            (B, L, D) — normalized and modulated
+            (B, L, D) - normalized and modulated
         """
         emb = self.linear(self.silu(conditioning))
         # (B, 2D) -> unsqueeze to (B, 1, 2D) -> split to (B, 1, D) each

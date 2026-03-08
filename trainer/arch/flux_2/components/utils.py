@@ -26,14 +26,14 @@ def prc_img(x: Tensor, t_coord: Tensor | None = None) -> tuple[Tensor, Tensor]:
     """Pack a 4-D latent tensor into the sequence format expected by Flux 2.
 
     Args:
-        x: Shape ``(C, H, W)`` or ``(B, C, H, W)`` — 128-channel latents.
+        x: Shape ``(C, H, W)`` or ``(B, C, H, W)`` - 128-channel latents.
         t_coord: Optional 1-D int tensor of time-coordinate values (length 1 for
             a single frame). Defaults to ``torch.arange(1)``.
 
     Returns:
         Tuple of:
-        - ``x_packed``: ``(HW, C)`` or ``(B, HW, C)`` — flattened spatial tokens.
-        - ``x_ids``:    ``(HW, 4)`` or ``(B, HW, 4)`` — per-token 4-D position IDs
+        - ``x_packed``: ``(HW, C)`` or ``(B, HW, C)`` - flattened spatial tokens.
+        - ``x_ids``:    ``(HW, 4)`` or ``(B, HW, 4)`` - per-token 4-D position IDs
           with layout ``(t, h, w, l)``.
     """
     h = x.shape[-2]
@@ -64,7 +64,7 @@ def prc_txt(x: Tensor, t_coord: Tensor | None = None) -> tuple[Tensor, Tensor]:
     """Generate 4-D position IDs for text tokens.
 
     Args:
-        x: Shape ``(L, D)`` or ``(B, L, D)`` — text embeddings.
+        x: Shape ``(L, D)`` or ``(B, L, D)`` - text embeddings.
         t_coord: Optional 1-D int tensor for the time coordinate. Defaults to
             ``torch.arange(1)``.
 
@@ -95,7 +95,7 @@ def unpack_latents(x: Tensor, h: int, w: int) -> Tensor:
     """Reshape packed token sequence back to spatial latent grid.
 
     Args:
-        x: ``(B, HW, C)`` — model output tokens.
+        x: ``(B, HW, C)`` - model output tokens.
         h: Latent height (H = image_height // 16).
         w: Latent width  (W = image_width // 16).
 
@@ -125,7 +125,7 @@ def scatter_ids(x: Tensor, x_ids: Tensor) -> list[Tensor]:
 
     Args:
         x:      ``(B, HW, C)``
-        x_ids:  ``(B, HW, 4)`` — position IDs ``(t, h, w, l)``
+        x_ids:  ``(B, HW, 4)`` - position IDs ``(t, h, w, l)``
 
     Returns:
         List of ``(1, C, T, H, W)`` tensors, one per batch item.

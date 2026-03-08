@@ -1,4 +1,4 @@
-"""Tests for trainer/data/augmentations.py — crop jitter and random flip."""
+"""Tests for trainer/data/augmentations.py - crop jitter and random flip."""
 from __future__ import annotations
 
 import torch
@@ -53,7 +53,7 @@ class TestApplyCropJitter:
             if not torch.equal(result, image_latents):
                 changed = True
                 break
-        assert changed, "apply_crop_jitter never changed the tensor — shifts may always be zero"
+        assert changed, "apply_crop_jitter never changed the tensor - shifts may always be zero"
 
     def test_dtype_preserved(self, image_latents):
         result = apply_crop_jitter(image_latents.half(), jitter_pixels=16)

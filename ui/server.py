@@ -97,6 +97,6 @@ app.include_router(queue_router)
 app.include_router(preflight_router)
 app.include_router(browse_router)
 
-# Static SPA fallback — serves index.html for unknown paths
+# Static SPA fallback - serves index.html for unknown paths
 if STATIC_DIR.exists():
     app.mount("/", StaticFiles(directory=str(STATIC_DIR), html=True), name="static")

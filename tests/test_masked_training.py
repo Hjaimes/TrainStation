@@ -1,4 +1,4 @@
-"""Tests for masked training — mask loading, normalization, and masked loss computation."""
+"""Tests for masked training - mask loading, normalization, and masked loss computation."""
 from __future__ import annotations
 
 import io
@@ -122,7 +122,7 @@ class TestNormalizeMask:
     def test_invalid_ndim_raises(self):
         """normalize_mask raises ValueError for unsupported mask ndim."""
         from trainer.data.mask_utils import normalize_mask
-        mask = torch.ones(8, 8)  # 2D — invalid
+        mask = torch.ones(8, 8)  # 2D - invalid
         with pytest.raises(ValueError, match="Unsupported mask ndim"):
             normalize_mask(mask, (8, 8))
 
@@ -165,7 +165,7 @@ class TestComputeMaskedLoss:
                 raise NotImplementedError
 
         s = _DummyStrategy(cfg)
-        # No loss_fn configured — falls back to MSE
+        # No loss_fn configured - falls back to MSE
         return s
 
     def test_all_ones_mask_matches_standard_mse(self, strategy):

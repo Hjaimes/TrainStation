@@ -15,7 +15,7 @@
             const data = await resp.json();
             architectures = data.models;
         } catch {
-            // API not available — fall back to current architecture
+            // API not available - fall back to current architecture
             if (model?.architecture) {
                 architectures = [model.architecture];
             }
@@ -100,7 +100,7 @@
             />
         </FormField>
 
-        <FormField label="VAE Path" description="Custom VAE weights — local path or HuggingFace ID (leave empty for default)">
+        <FormField label="VAE Path" description="Custom VAE weights - local path or HuggingFace ID (leave empty for default)">
             <PathInput
                 value={model?.vae_path ?? ''}
                 mode="file"

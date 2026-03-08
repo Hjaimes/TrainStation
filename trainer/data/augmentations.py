@@ -22,7 +22,7 @@ def apply_crop_jitter(
 ) -> Tensor:
     """Random spatial roll of latents to simulate crop augmentation.
 
-    Uses ``torch.roll`` so there is no padding artefact — latents wrap around.
+    Uses ``torch.roll`` so there is no padding artefact - latents wrap around.
     This matches the Musubi_Tuner approach while being safe for all bucket sizes.
 
     Args:
@@ -41,7 +41,7 @@ def apply_crop_jitter(
     shift_h = int(torch.randint(-max_shift, max_shift + 1, (1,)).item())
     shift_w = int(torch.randint(-max_shift, max_shift + 1, (1,)).item())
 
-    # dims=-2 is H, dims=-1 is W — valid for both 4-D and 5-D tensors.
+    # dims=-2 is H, dims=-1 is W - valid for both 4-D and 5-D tensors.
     return torch.roll(latents, shifts=(shift_h, shift_w), dims=(-2, -1))
 
 
@@ -67,7 +67,7 @@ def apply_random_flip(
 
     batch_size = latents.shape[0]
 
-    # Build a boolean mask for which samples to flip — one draw per sample.
+    # Build a boolean mask for which samples to flip - one draw per sample.
     flip_mask = torch.rand(batch_size) < probability  # shape [B]
 
     if not flip_mask.any():

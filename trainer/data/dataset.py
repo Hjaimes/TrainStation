@@ -93,7 +93,7 @@ class BucketBatchManager:
         # Sorted for deterministic order before the first shuffle.
         self.bucket_resos: list[tuple[int, ...]] = sorted(self.buckets.keys())
 
-        # List of (bucket_reso, batch_start_index) — one entry per batch.
+        # List of (bucket_reso, batch_start_index) - one entry per batch.
         self.bucket_batch_indices: list[tuple[tuple[int, ...], int]] = []
         for bucket_reso in self.bucket_resos:
             bucket = self.buckets[bucket_reso]
@@ -123,7 +123,7 @@ class BucketBatchManager:
         Load safetensors cache files for one batch and return a collated dict.
 
         Key-stripping logic (improved from Musubi_Tuner's BucketBatchManager):
-          - "varlen_*"  → strip prefix via slice (not .replace() — avoids
+          - "varlen_*"  → strip prefix via slice (not .replace() - avoids
                           stripping from middle of key); tensor stays as list
           - "*_mask"    → keep key as-is
           - otherwise   → rsplit("_", 1)[0]  (strip dtype suffix)
@@ -535,7 +535,7 @@ class CachedDatasetGroup(torch.utils.data.ConcatDataset):
         self._datasets: list[CachedDataset] = datasets
 
     # ------------------------------------------------------------------
-    # Epoch / seed management — propagate to all child datasets
+    # Epoch / seed management - propagate to all child datasets
     # ------------------------------------------------------------------
 
     def set_current_epoch(self, epoch: int) -> None:

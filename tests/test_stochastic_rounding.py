@@ -40,7 +40,7 @@ class TestCopyStochastic:
         """
         from trainer.util.stochastic_rounding import copy_stochastic_
 
-        # 1.0 + 2^-8 = 1.00390625 — exactly between two adjacent bf16 values
+        # 1.0 + 2^-8 = 1.00390625 - exactly between two adjacent bf16 values
         # (bf16 has 7 mantissa bits; the 8th bit is the first dropped bit)
         fp32_value = torch.tensor([1.0 + 2**-8], dtype=torch.float32)
         target = torch.zeros(1, dtype=torch.bfloat16)
@@ -95,7 +95,7 @@ class TestRegisterHook:
         assert len(optimizer._optimizer_step_post_hooks) >= 1
 
     def test_hook_fires_after_step(self):
-        """Hook fires after optimizer.step() — verified via a counter side-effect."""
+        """Hook fires after optimizer.step() - verified via a counter side-effect."""
         from trainer.util.stochastic_rounding import register_stochastic_rounding_hook
 
         call_log: list[int] = []

@@ -151,7 +151,7 @@ def check_cache_exists(cache_directory: str, architecture: str) -> bool:
     """Quick sanity check: does the cache directory contain at least one
     file matching the expected latent cache pattern?
 
-    Uses iglob to avoid materializing the full file list — returns as soon
+    Uses iglob to avoid materializing the full file list - returns as soon
     as one match is found.
     """
     pattern = os.path.join(cache_directory, f"*_{architecture}.safetensors")
@@ -204,7 +204,7 @@ class RegDataIterator:
         try:
             return next(self._iter)
         except StopIteration:
-            logger.debug("Regularization dataloader exhausted — cycling.")
+            logger.debug("Regularization dataloader exhausted - cycling.")
             self._iter = iter(self.dataloader)
             return next(self._iter)
 

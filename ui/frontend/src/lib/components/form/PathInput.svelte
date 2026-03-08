@@ -92,7 +92,7 @@
     </button>
     <input type="text" class="path-input" {value} {placeholder} {disabled} oninput={handleInput} spellcheck="false" />
     {#if isHfId()}
-        <span class="hf-badge" title="HuggingFace model ID — will be downloaded automatically">HF</span>
+        <span class="hf-badge" title="HuggingFace model ID - will be downloaded automatically">HF</span>
     {/if}
 </div>
 

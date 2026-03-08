@@ -28,7 +28,7 @@ def copy_stochastic_(target: Tensor, source: Tensor) -> None:
     # Reinterpret fp32 as int32, add random noise to lower 16 bits, mask, convert back
     result = torch.randint_like(source, dtype=torch.int32, low=0, high=(1 << 16))
     result.add_(source.view(dtype=torch.int32))
-    result.bitwise_and_(-65536)  # 0xFFFF0000 — zero out lower 16 bits
+    result.bitwise_and_(-65536)  # 0xFFFF0000 - zero out lower 16 bits
     target.copy_(result.view(dtype=torch.float32))
 
 
@@ -40,7 +40,7 @@ def _stochastic_rounding_hook(optimizer: Optimizer, *args, **kwargs) -> None:
                 # The optimizer step computed in fp32 master weights or
                 # accumulated updates; now we need to copy back with
                 # stochastic rounding.
-                # Only apply if param is bf16 — the optimizer state may be fp32.
+                # Only apply if param is bf16 - the optimizer state may be fp32.
                 copy_stochastic_(p.data, p.data.float())
 
 

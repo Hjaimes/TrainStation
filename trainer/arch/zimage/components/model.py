@@ -6,10 +6,10 @@ The Z-Image model forward signature is:
     model(x, t, cap_feats, cap_mask) -> Tensor [B, C, F, H, W]
 
 Where:
-    x:         [B, C, F, H, W] — noisy latents (F=1 for images, with dummy frame dim)
-    t:         [B] — reversed timesteps in [0, 1], computed as (1000 - raw_t) / 1000
-    cap_feats: [B, L, D] — Qwen3-4B text embeddings (cached, not encoded on-the-fly)
-    cap_mask:  [B, L] bool — True for valid tokens, or None if split_attn
+    x:         [B, C, F, H, W] - noisy latents (F=1 for images, with dummy frame dim)
+    t:         [B] - reversed timesteps in [0, 1], computed as (1000 - raw_t) / 1000
+    cap_feats: [B, L, D] - Qwen3-4B text embeddings (cached, not encoded on-the-fly)
+    cap_mask:  [B, L] bool - True for valid tokens, or None if split_attn
 
 Unlike Wan (which returns List[Tensor]), ZImageTransformer2DModel returns a single
 batched Tensor [B, C, F, H, W].

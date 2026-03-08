@@ -1,7 +1,7 @@
 """HunyuanVideo model strategy.
 
 Follows the exact pattern of trainer/arch/wan/strategy.py.
-All config values are cached in setup() — no Pydantic attribute access in hot path.
+All config values are cached in setup() - no Pydantic attribute access in hot path.
 """
 from __future__ import annotations
 
@@ -48,13 +48,13 @@ class HunyuanVideoStrategy(ModelStrategy):
         """Load HunyuanVideoTransformer3DModel from checkpoint.
 
         Config fields used:
-            model.base_model_path       — path to transformer .safetensors
-            model.dtype                 — training dtype (bf16, fp16, fp32)
-            model.attn_mode             — attention backend (torch, flash, sageattn, etc.)
-            model.split_attn            — whether to use split attention
-            model.block_swap_count      — number of blocks to swap CPU↔GPU
-            model.gradient_checkpointing — enable gradient checkpointing
-            model.model_kwargs          — extra kwargs, e.g. {"guidance_scale": 7.0}
+            model.base_model_path       - path to transformer .safetensors
+            model.dtype                 - training dtype (bf16, fp16, fp32)
+            model.attn_mode             - attention backend (torch, flash, sageattn, etc.)
+            model.split_attn            - whether to use split attention
+            model.block_swap_count      - number of blocks to swap CPU↔GPU
+            model.gradient_checkpointing - enable gradient checkpointing
+            model.model_kwargs          - extra kwargs, e.g. {"guidance_scale": 7.0}
         """
         from .components.configs import HUNYUAN_VIDEO_CONFIG
         from .components.embeddings import get_rotary_pos_embed_by_shape
@@ -163,8 +163,8 @@ class HunyuanVideoStrategy(ModelStrategy):
         """Sample timesteps for HunyuanVideo flow matching training.
 
         Returns:
-            t: [B] float in [min_t, max_t] — interpolation coefficient.
-            timesteps: [B] float in [1, 1001] — model's expected range.
+            t: [B] float in [min_t, max_t] - interpolation coefficient.
+            timesteps: [B] float in [1, 1001] - model's expected range.
         """
         t = self._sample_t(
             bsz, device,
@@ -192,10 +192,10 @@ class HunyuanVideoStrategy(ModelStrategy):
         """Flow matching training step for HunyuanVideo.
 
         Batch keys expected:
-            latents      : [B, 16, F, H, W] — pre-encoded video latents
-            text_states  : [B, S, 4096] — LLM (Llama) text embeddings
-            text_mask    : [B, S] — attention mask for text_states
-            text_states_2: [B, 768] — CLIP pooled embeddings
+            latents      : [B, 16, F, H, W] - pre-encoded video latents
+            text_states  : [B, S, 4096] - LLM (Llama) text embeddings
+            text_mask    : [B, S] - attention mask for text_states
+            text_states_2: [B, 768] - CLIP pooled embeddings
 
         Returns:
             TrainStepOutput with scalar loss and detached metrics.

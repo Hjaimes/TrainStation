@@ -108,12 +108,12 @@ class JointTransformerBlock(nn.Module):
     ) -> tuple[Tensor, Tensor]:
         """
         Args:
-            hidden_states:         (B, L_img, D) — image token sequence
-            encoder_hidden_states: (B, L_txt, D) — text token sequence
-            temb:                  (B, D)         — timestep+pooled conditioning
+            hidden_states:         (B, L_img, D) - image token sequence
+            encoder_hidden_states: (B, L_txt, D) - text token sequence
+            temb:                  (B, D)         - timestep+pooled conditioning
 
         Returns:
-            (hidden_states, encoder_hidden_states) — updated image and text sequences
+            (hidden_states, encoder_hidden_states) - updated image and text sequences
         """
         # --- Image norm + modulation ---
         img_normed, gate_msa_img, shift_mlp_img, scale_mlp_img, gate_mlp_img = (
@@ -202,11 +202,11 @@ class SD3SingleTransformerBlock(nn.Module):
     def forward(self, hidden_states: Tensor, temb: Tensor) -> Tensor:
         """
         Args:
-            hidden_states: (B, L, D) — image token sequence
-            temb:          (B, D)    — timestep+pooled conditioning
+            hidden_states: (B, L, D) - image token sequence
+            temb:          (B, D)    - timestep+pooled conditioning
 
         Returns:
-            (B, L, D) — updated image token sequence
+            (B, L, D) - updated image token sequence
         """
         # Norm + modulation (6 params, same as joint block)
         x_normed, gate_msa, shift_mlp, scale_mlp, gate_mlp = self.norm(hidden_states, temb)

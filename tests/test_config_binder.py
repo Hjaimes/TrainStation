@@ -1,4 +1,4 @@
-"""Tests for ConfigBinder — flat/nested dict roundtrips and callbacks."""
+"""Tests for ConfigBinder - flat/nested dict roundtrips and callbacks."""
 from ui.binding import ConfigBinder
 
 

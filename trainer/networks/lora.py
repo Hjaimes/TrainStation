@@ -1,5 +1,5 @@
 # LoRA (Low-Rank Adaptation) network module
-# Ported from Musubi_Tuner — math/forward logic identical to source.
+# Ported from Musubi_Tuner - math/forward logic identical to source.
 #
 # References:
 # https://github.com/microsoft/LoRA/blob/main/loralib/layers.py
@@ -109,7 +109,7 @@ class LoRAModule(nn.Module):
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         org_forwarded = self.org_forward(x)
 
-        # module dropout — skip entire LoRA path
+        # module dropout - skip entire LoRA path
         if self.module_dropout is not None and self.training:
             if torch.rand(1) < self.module_dropout:
                 return org_forwarded

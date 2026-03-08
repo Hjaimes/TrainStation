@@ -1,7 +1,7 @@
 """Tests for Flux 2 architecture components.
 
 Following the pattern of tests/test_wan_components.py.
-All tests run on CPU with tiny synthetic tensors — no real weights required.
+All tests run on CPU with tiny synthetic tensors - no real weights required.
 """
 from __future__ import annotations
 
@@ -155,7 +155,7 @@ class TestRegistry:
 class TinyMockFlux2(nn.Module):
     """Minimal model with Flux 2 forward signature.
 
-    Returns a single tensor (B, HW, C) — not a list like WanModel.
+    Returns a single tensor (B, HW, C) - not a list like WanModel.
     """
 
     def __init__(self, in_channels: int = 128):
@@ -172,7 +172,7 @@ class TinyMockFlux2(nn.Module):
         ctx_ids: torch.Tensor,
         guidance: torch.Tensor | None,
     ) -> torch.Tensor:
-        # x: (B, HW, C) — apply a simple linear projection and return
+        # x: (B, HW, C) - apply a simple linear projection and return
         B, L, C = x.shape
         out = self.linear(x.float()).to(x.dtype)
         return out  # (B, HW, C)

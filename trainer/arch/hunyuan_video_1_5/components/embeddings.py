@@ -7,7 +7,7 @@ Includes:
 - TextProjection and SingleTokenRefiner (text token pre-processing)
 - PatchEmbed (spatial patchification of latents)
 
-Self-contained — no imports from other arch packages.
+Self-contained - no imports from other arch packages.
 
 Porting improvements:
 - Pre-allocated grid via torch.linspace (avoid repeated allocation)
@@ -52,7 +52,7 @@ def get_1d_rotary_pos_embed(
     freqs = 1.0 / (theta ** (torch.arange(0, dim, 2, dtype=torch.float32)[: dim // 2] / dim))
     # outer product → [S, dim//2]
     freqs = torch.outer(pos.float(), freqs)
-    # repeat_interleave to get [S, dim] — avoids cat overhead
+    # repeat_interleave to get [S, dim] - avoids cat overhead
     freqs_cos = freqs.cos().repeat_interleave(2, dim=1)
     freqs_sin = freqs.sin().repeat_interleave(2, dim=1)
     return freqs_cos, freqs_sin

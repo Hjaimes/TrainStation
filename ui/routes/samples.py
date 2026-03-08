@@ -1,4 +1,4 @@
-"""Sample gallery API — lists and serves generated sample files."""
+"""Sample gallery API - lists and serves generated sample files."""
 from __future__ import annotations
 
 import logging

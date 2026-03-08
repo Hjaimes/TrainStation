@@ -4,7 +4,7 @@ Self-contained copy of Musubi_Tuner's custom_offloading_utils.py.
 Improvements:
   - Removed print() statements, replaced with logger calls
   - Removed dead/commented-out code
-  - Module is self-contained — do NOT import from wan's utils.py
+  - Module is self-contained - do NOT import from wan's utils.py
 """
 from __future__ import annotations
 
@@ -278,7 +278,7 @@ class Offloader:
 
 
 # ---------------------------------------------------------------------------
-# ModelOffloader — forward + backward support
+# ModelOffloader - forward + backward support
 # ---------------------------------------------------------------------------
 
 class ModelOffloader(Offloader):

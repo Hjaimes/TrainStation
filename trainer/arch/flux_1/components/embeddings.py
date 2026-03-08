@@ -18,7 +18,7 @@ from torch import Tensor
 class Flux1RoPE(nn.Module):
     """3D Rotary Position Embeddings for Flux 1.
 
-    Axes: (channel=16, y=56, x=56) — each axis gets its own frequency band.
+    Axes: (channel=16, y=56, x=56) - each axis gets its own frequency band.
     Total RoPE dim = sum(axes_dim) = 128 = head_dim.
 
     Unlike Flux 2's N-D RoPE (which uses rotation matrices), this implementation
@@ -48,10 +48,10 @@ class Flux1RoPE(nn.Module):
         """Compute RoPE frequencies from 3D position IDs.
 
         Args:
-            positions: (B, N, 3) float tensor — [channel_idx, y, x]
+            positions: (B, N, 3) float tensor - [channel_idx, y, x]
 
         Returns:
-            (B, N, sum(axes_dim)) — format: [all_cos | all_sin] where cos and sin
+            (B, N, sum(axes_dim)) - format: [all_cos | all_sin] where cos and sin
             each have dim sum(axes_dim)//2 = head_dim//2. This format matches
             _apply_rope_flux1() which splits at the midpoint.
         """

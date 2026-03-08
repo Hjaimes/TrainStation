@@ -3,7 +3,7 @@
 Dual-stream architecture with:
 - 16ch latents packed 2x2 to 64ch input tokens
 - T5-XXL (4096-dim) text encoder + CLIP-L pooled (768-dim) conditioning
-- 3D RoPE (16, 56, 56) — image-only, no temporal dimension
+- 3D RoPE (16, 56, 56) - image-only, no temporal dimension
 - 19 Flux1DoubleStreamBlocks + 38 Flux1SingleStreamBlocks
 - Per-block AdaLayerNorm modulation (not global shared like Flux 2)
 - GEGLU activation
@@ -233,7 +233,7 @@ class Flux1Transformer(nn.Module):
             supports_backward, device, use_pinned_memory,
         )
         logger.info(
-            "Flux1: block swap enabled — total=%d, double=%d, single=%d",
+            "Flux1: block swap enabled - total=%d, double=%d, single=%d",
             num_blocks, double_to_swap, single_to_swap,
         )
 
@@ -273,16 +273,16 @@ class Flux1Transformer(nn.Module):
         """Forward pass for Flux 1 transformer.
 
         Args:
-            x:           (B, HW, 64) — packed image tokens (16ch -> 64ch).
-            x_ids:       (B, HW, 3)  — 3D image position IDs [ch, y, x].
-            timesteps:   (B,)        — float timesteps in [0, 1].
-            ctx:         (B, L, 4096) — T5-XXL text embeddings.
-            ctx_ids:     (B, L, 3)   — 3D text position IDs (all zeros).
-            guidance:    (B,)        — guidance scale, or None if unused (schnell).
-            pooled_text: (B, 768)    — CLIP-L pooled text embedding, or None.
+            x:           (B, HW, 64) - packed image tokens (16ch -> 64ch).
+            x_ids:       (B, HW, 3)  - 3D image position IDs [ch, y, x].
+            timesteps:   (B,)        - float timesteps in [0, 1].
+            ctx:         (B, L, 4096) - T5-XXL text embeddings.
+            ctx_ids:     (B, L, 3)   - 3D text position IDs (all zeros).
+            guidance:    (B,)        - guidance scale, or None if unused (schnell).
+            pooled_text: (B, 768)    - CLIP-L pooled text embedding, or None.
 
         Returns:
-            (B, HW, 64) — predicted velocity field (packed, same shape as x).
+            (B, HW, 64) - predicted velocity field (packed, same shape as x).
         """
         num_txt_tokens = ctx.shape[1]
 
@@ -404,7 +404,7 @@ def load_flux1_model(
 
     logger.info("Loading Flux 1 DiT from %s on %s", dit_path, loading_device)
 
-    # Re-use Wan's load_safetensors_with_lora_and_fp8 — it is arch-agnostic
+    # Re-use Wan's load_safetensors_with_lora_and_fp8 - it is arch-agnostic
     from trainer.arch.wan.components.utils import (
         load_safetensors_with_lora_and_fp8,
         apply_fp8_monkey_patch,

@@ -373,7 +373,7 @@ def create_scheduler(
         return scheduler
 
     if "." in scheduler_type:
-        # Dynamic import — use original casing for the class name
+        # Dynamic import - use original casing for the class name
         scheduler_cls = _import_scheduler_class(scheduler_type)
         try:
             scheduler = scheduler_cls(optimizer, **kwargs)
