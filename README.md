@@ -19,7 +19,7 @@ A modern AI model training application with a web UI and CLI. Fine-tune diffusio
 | SD3 | Image | Fully implemented |
 | Kandinsky 5 | Image | Fully implemented |
 | Qwen Image | Image | Fully implemented |
-| ZImage | Image | Fully implemented |
+| Z-Image | Image | Fully implemented |
 
 ## Features
 
